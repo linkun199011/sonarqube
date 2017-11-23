@@ -17,29 +17,20 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.server.platform.db.migration;
+package org.sonar.db.measure;
 
-import org.junit.Test;
-import org.sonar.core.platform.ComponentContainer;
+import org.apache.ibatis.annotations.Param;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.sonar.core.platform.ComponentContainer.COMPONENTS_IN_EMPTY_COMPONENT_CONTAINER;
+public interface LiveMeasureMapper {
 
-public class MigrationConfigurationModuleTest {
-  private MigrationConfigurationModule underTest = new MigrationConfigurationModule();
+  void insert(
+    @Param("dto") LiveMeasureDto dto,
+    @Param("now") long now);
 
-  @Test
-  public void verify_component_count() {
-    ComponentContainer container = new ComponentContainer();
+  int update(
+    @Param("dto") LiveMeasureDto dto,
+    @Param("now") long now);
 
-    underTest.configure(container);
-
-    assertThat(container.getPicoContainer().getComponentAdapters())
-      .hasSize(COMPONENTS_IN_EMPTY_COMPONENT_CONTAINER
-        // DbVersion classes
-        + 11
-        // Others
-        + 3);
-  }
-
+  void deleteByProjectUuid(
+    @Param("projectUuid") String projectUuid);
 }

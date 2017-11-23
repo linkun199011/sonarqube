@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd">
+
+<mapper namespace="org.sonar.db.measure.LiveMeasureMapper">
+
+  <sql id="columns">
+    lm.uuid as uuid,
+    lm.component_uuid as componentUuid,
+    lm.project_uuid as projectUuid,
+    lm.metric_id as metricId,
+    lm.value as value,
+    lm.text_value as textValue,
+    lm.measure_data as data,
+    lm.variation as variation
+  </sql>
+
+  <insert id="insert" parameterType="map" useGeneratedKeys="false">
+    insert into live_measures (
+    uuid,
+    component_uuid,
+    project_uuid,
+    metric_id,
+    value,
+    text_value,
+    variation,
+    measure_data,
+    created_at,
+    updated_at
+    ) values (
+    #{dto.uuid, jdbcType=VARCHAR},
+    #{dto.componentUuid, jdbcType=VARCHAR},
+    #{dto.projectUuid, jdbcType=VARCHAR},
+    #{dto.metricId, jdbcType=INTEGER},
+    #{dto.value, jdbcType=DOUBLE},
+    #{dto.textValue, jdbcType=VARCHAR},
+    #{dto.variation, jdbcType=DOUBLE},
+    #{dto.data, jdbcType=BINARY},
+    #{now, jdbcType=BIGINT},
+    #{now, jdbcType=BIGINT}
+    )
+  </insert>
+
+  <update id="update" parameterType="map">
+    update live_measures set
+    value = #{dto.value, jdbcType=DOUBLE},
+    variation = #{dto.variation, jdbcType=DOUBLE},
+    text_value = #{dto.textValue, jdbcType=VARCHAR},
+    measure_data  = #{dto.data, jdbcType=BINARY},
+    updated_at = #{now, jdbcType=BIGINT}
+    where uuid = #{dto.uuid, jdbcType=VARCHAR}
+  </update>
+
+  <delete id="deleteByProjectUuid" parameterType="String">
+    delete from live_measures
+    where project_uuid = #{projectUuid, jdbcType=VARCHAR}
+  </delete>
+</mapper>
