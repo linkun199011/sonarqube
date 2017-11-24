@@ -52,6 +52,24 @@ public class PopulateLiveMeasuresTest {
     return m -> m.get(name);
   }
 
+  @Test
+  public void migration_is_reentrant() throws SQLException {
+    generateProjectMeasures();
+
+    underTest.execute();
+    underTest.execute();
+
+    assertThat(getLiveMeasures()).extracting(
+      field("COMPONENT_UUID"),
+      field("PROJECT_UUID"),
+      field("METRIC_ID"),
+      field("VALUE"),
+      field("TEXT_VALUE"),
+      field("VARIATION"),
+      field("MEASURE_DATA")
+    ).containsExactlyInAnyOrder(generateLiveMeasures());
+  }
+
   private void generateProjectMeasures() {
     HashMap<String, Object> project = new HashMap<>();
     project.put("UUID", "PRJ1");

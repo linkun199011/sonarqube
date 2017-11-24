@@ -38,8 +38,8 @@ public class PopulateLiveMeasures extends DataChange {
   @Override
   protected void execute(Context context) throws SQLException {
     long now = system2.now();
+    context.prepareUpsert("TRUNCATE TABLE live_measures").execute();
     MassUpdate massUpdate = context.prepareMassUpdate();
-    // TODO reentrancy
     massUpdate.select("SELECT p.uuid, p.project_uuid, pm.metric_id, pm.value, pm.text_value, pm.variation_value_1, pm.measure_data " +
       "FROM project_measures pm " +
       "INNER JOIN projects p on p.uuid = pm.component_uuid " +
