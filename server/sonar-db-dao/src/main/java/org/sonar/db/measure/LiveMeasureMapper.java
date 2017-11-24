@@ -19,9 +19,15 @@
  */
 package org.sonar.db.measure;
 
+import java.util.Collection;
+import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface LiveMeasureMapper {
+
+  List<LiveMeasureDto> selectByComponentUuids(
+    @Param("componentUuids") List<String> componentUuids,
+    @Param("metricIds") Collection<Integer> metricIds);
 
   void insert(
     @Param("dto") LiveMeasureDto dto,

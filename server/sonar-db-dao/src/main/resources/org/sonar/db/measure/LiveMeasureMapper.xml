@@ -14,6 +14,16 @@
     lm.variation as variation
   </sql>
 
+  <select id="selectByComponentUuids" parameterType="map" resultType="org.sonar.db.measure.LiveMeasureDto">
+    select <include refid="columns"/> from live_measures lm
+    where
+    lm.metric_id in <foreach item="metricId" collection="metricIds" open="(" separator="," close=")">#{metricId, jdbcType=INTEGER}</foreach>
+    and lm.component_uuid in
+    <foreach item="componentUuid" collection="componentUuids" open="(" separator="," close=")">
+      #{componentUuid, jdbcType=VARCHAR}
+    </foreach>
+  </select>
+
   <insert id="insert" parameterType="map" useGeneratedKeys="false">
     insert into live_measures (
     uuid,

@@ -19,10 +19,15 @@
  */
 package org.sonar.db.measure;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import org.sonar.api.utils.System2;
 import org.sonar.core.util.Uuids;
 import org.sonar.db.Dao;
 import org.sonar.db.DbSession;
+
+import static org.sonar.db.DatabaseUtils.executeLargeInputs;
 
 public class LiveMeasureDao implements Dao {
 
@@ -30,6 +35,16 @@ public class LiveMeasureDao implements Dao {
 
   public LiveMeasureDao(System2 system2) {
     this.system2 = system2;
+  }
+
+  public List<LiveMeasureDto> selectByComponentUuids(DbSession dbSession, Collection<String> largeComponentUuids, Collection<Integer> metricIds) {
+    if (largeComponentUuids.isEmpty() || metricIds.isEmpty()) {
+      return Collections.emptyList();
+    }
+
+    return executeLargeInputs(
+      largeComponentUuids,
+      componentUuids -> mapper(dbSession).selectByComponentUuids(componentUuids, metricIds));
   }
 
   public void insert(DbSession dbSession, LiveMeasureDto dto) {

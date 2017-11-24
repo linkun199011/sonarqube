@@ -272,4 +272,11 @@ class PurgeCommands {
     session.commit();
     profiler.stop();
   }
+
+  void deleteLiveMeasures(String rootUuid) {
+    profiler.start("deleteLiveMeasures (live_measures)");
+    purgeMapper.deleteLiveMeasuresByProjectUuid(rootUuid);
+    session.commit();
+    profiler.stop();
+  }
 }

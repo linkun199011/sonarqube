@@ -57,7 +57,6 @@ public class MeasureDaoTest {
   private static final long A_PERSON_ID = 444L;
   private static final String LAST_ANALYSIS_UUID = "A1";
   private static final String OTHER_ANALYSIS_UUID = "A2";
-  private static final String PREVIOUS_ANALYSIS_UUID = "previous analysis UUID";
 
   @Rule
   public ExpectedException expectedException = ExpectedException.none();
