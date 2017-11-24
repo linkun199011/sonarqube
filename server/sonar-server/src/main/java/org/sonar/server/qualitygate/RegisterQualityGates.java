@@ -72,7 +72,7 @@ public class RegisterQualityGates implements Startable {
   private final QualityGateConditionDao qualityGateConditionDao;
 
   public RegisterQualityGates(DbClient dbClient, QualityGateUpdater qualityGateUpdater,
-    QualityGateConditionsUpdater qualityGateConditionsUpdater, QualityGateFinder qualityGateFinder) {
+                              QualityGateConditionsUpdater qualityGateConditionsUpdater, QualityGateFinder qualityGateFinder) {
     this.dbClient = dbClient;
     this.qualityGateConditionsUpdater = qualityGateConditionsUpdater;
     this.qualityGateUpdater = qualityGateUpdater;
@@ -135,7 +135,7 @@ public class RegisterQualityGates implements Startable {
     qgConditionsToBeCreated.removeAll(qualityGateConditions);
     qgConditionsToBeCreated.stream()
       .forEach(qgc ->
-        qualityGateConditionsUpdater.createCondition(dbSession, builtin.getId(), qgc.getMetricKey(), qgc.getOperator(), qgc.getWarningThreshold(),
+        qualityGateConditionsUpdater.createCondition(dbSession, builtin, qgc.getMetricKey(), qgc.getOperator(), qgc.getWarningThreshold(),
           qgc.getErrorThreshold(), qgc.getPeriod())
       );
 
