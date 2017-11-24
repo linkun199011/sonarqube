@@ -21,7 +21,6 @@ package org.sonar.server.platform.db.migration.version.v70;
 
 import java.sql.SQLException;
 import org.sonar.db.Database;
-import org.sonar.server.platform.db.migration.def.ColumnDef;
 import org.sonar.server.platform.db.migration.def.VarcharColumnDef;
 import org.sonar.server.platform.db.migration.sql.CreateIndexBuilder;
 import org.sonar.server.platform.db.migration.sql.CreateTableBuilder;
@@ -43,30 +42,26 @@ public class CreateTableLiveMeasures extends DdlChange {
 
   @Override
   public void execute(Context context) throws SQLException {
-    ColumnDef projectColumn = newVarcharColumnDefBuilder()
-      .setColumnName("project_uuid")
-      .setIsNullable(false)
-      .setLimit(VarcharColumnDef.UUID_VARCHAR_SIZE)
-      .build();
-    ColumnDef componentColumn = newVarcharColumnDefBuilder()
-      .setColumnName("component_uuid")
-      .setIsNullable(false)
-      .setLimit(VarcharColumnDef.UUID_VARCHAR_SIZE)
-      .build();
-    ColumnDef metricColumn = newIntegerColumnDefBuilder()
-      .setColumnName("metric_id")
-      .setIsNullable(false)
-      .build();
-
     context.execute(new CreateTableBuilder(getDialect(), TABLE_NAME)
       .addPkColumn(newVarcharColumnDefBuilder()
         .setColumnName("uuid")
         .setIsNullable(false)
+        .setLimit(VarcharColumnDef.UUID_SIZE)
+        .build())
+      .addColumn(newVarcharColumnDefBuilder()
+        .setColumnName("project_uuid")
+        .setIsNullable(false)
         .setLimit(VarcharColumnDef.UUID_VARCHAR_SIZE)
         .build())
-      .addColumn(projectColumn)
-      .addColumn(componentColumn)
-      .addColumn(metricColumn)
+      .addColumn(newVarcharColumnDefBuilder()
+        .setColumnName("component_uuid")
+        .setIsNullable(false)
+        .setLimit(VarcharColumnDef.UUID_VARCHAR_SIZE)
+        .build())
+      .addColumn(newIntegerColumnDefBuilder()
+        .setColumnName("metric_id")
+        .setIsNullable(false)
+        .build())
       .addColumn(newDecimalColumnDefBuilder()
         .setColumnName("value")
         .setPrecision(38)
@@ -96,15 +91,26 @@ public class CreateTableLiveMeasures extends DdlChange {
       .build());
 
     context.execute(new CreateIndexBuilder(getDialect())
-      .addColumn(projectColumn)
+      .addColumn(newVarcharColumnDefBuilder()
+        .setColumnName("project_uuid")
+        .setIsNullable(false)
+        .setLimit(VarcharColumnDef.UUID_VARCHAR_SIZE)
+        .build())
       .setUnique(false)
       .setTable(TABLE_NAME)
       .setName("live_measures_project")
       .build());
 
     context.execute(new CreateIndexBuilder(getDialect())
-      .addColumn(componentColumn)
-      .addColumn(metricColumn)
+      .addColumn(newVarcharColumnDefBuilder()
+        .setColumnName("component_uuid")
+        .setIsNullable(false)
+        .setLimit(VarcharColumnDef.UUID_VARCHAR_SIZE)
+        .build())
+      .addColumn(newIntegerColumnDefBuilder()
+        .setColumnName("metric_id")
+        .setIsNullable(false)
+        .build())
       .setUnique(true)
       .setTable(TABLE_NAME)
       .setName("live_measures_component")
