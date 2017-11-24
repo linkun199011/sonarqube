@@ -20,7 +20,7 @@
 package org.sonar.server.computation.task.projectanalysis.measure;
 
 import javax.annotation.CheckForNull;
-import javax.annotation.Nonnull;
+import org.sonar.db.measure.LiveMeasureDto;
 import org.sonar.db.measure.MeasureDto;
 import org.sonar.server.computation.task.projectanalysis.analysis.AnalysisMetadataHolder;
 import org.sonar.server.computation.task.projectanalysis.component.Component;
@@ -38,7 +38,6 @@ public class MeasureToMeasureDto {
     this.analysisMetadataHolder = analysisMetadataHolder;
   }
 
-  @Nonnull
   public MeasureDto toMeasureDto(Measure measure, Metric metric, Component component) {
     MeasureDto out = new MeasureDto();
     out.setMetricId(metric.getId());
@@ -54,6 +53,20 @@ public class MeasureToMeasureDto {
     if (developer != null) {
       out.setDeveloperId(dbIdsRepository.getDeveloperId(developer));
     }
+    out.setValue(valueAsDouble(measure));
+    out.setData(data(measure));
+    return out;
+  }
+
+  public LiveMeasureDto toLiveMeasureDto(Measure measure, Metric metric, Component component) {
+    LiveMeasureDto out = new LiveMeasureDto();
+    out.setMetricId(metric.getId());
+    out.setComponentUuid(component.getUuid());
+    out.setProjectUuid(analysisMetadataHolder.getProject().getUuid());
+    if (measure.hasVariation()) {
+      out.setVariation(measure.getVariation());
+    }
+
     out.setValue(valueAsDouble(measure));
     out.setData(data(measure));
     return out;
