@@ -38,7 +38,6 @@ import org.sonar.server.ui.PageRepository;
 import org.sonar.server.user.UserSession;
 
 import static org.sonar.db.permission.OrganizationPermission.ADMINISTER;
-import static org.sonar.db.permission.OrganizationPermission.PROVISION_PROJECTS;
 import static org.sonar.server.ws.KeyExamples.KEY_ORG_EXAMPLE_001;
 import static org.sonar.server.ws.WsUtils.checkFoundWithOptional;
 
@@ -98,9 +97,6 @@ public class OrganizationAction implements NavigationWsAction {
   private void writeOrganization(JsonWriter json, OrganizationDto organization, boolean newProjectPrivate) {
     json.name("organization")
       .beginObject()
-      .prop("canAdmin", userSession.hasPermission(ADMINISTER, organization))
-      .prop("canProvisionProjects", userSession.hasPermission(PROVISION_PROJECTS, organization))
-      .prop("canDelete", organization.isGuarded() ? userSession.isSystemAdministrator() : userSession.hasPermission(ADMINISTER, organization))
       .prop("isDefault", organization.getKey().equals(defaultOrganizationProvider.get().getKey()))
       .prop("projectVisibility", Visibility.getLabel(newProjectPrivate))
       .prop("canUpdateProjectsVisibilityToPrivate",

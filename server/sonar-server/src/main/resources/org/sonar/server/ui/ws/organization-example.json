@@ -1,8 +1,8 @@
 {
   "organization": {
-    "canAdmin": true,
-    "canProvisionProjects": true,
-    "canDelete": false,
+    "isDefault": false,
+    "projectVisibility": "public",
+    "canUpdateProjectsVisibilityToPrivate": false,
     "pages": [
       {
         "key": "my-plugin/org-page",
