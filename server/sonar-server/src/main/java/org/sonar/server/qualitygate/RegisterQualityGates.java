@@ -76,7 +76,6 @@ public class RegisterQualityGates implements Startable {
     this.dbClient = dbClient;
     this.qualityGateUpdater = qualityGateUpdater;
     this.qualityGateConditionsUpdater = qualityGateConditionsUpdater;
-    this.qualityGateUpdater = qualityGateUpdater;
     this.qualityGateFinder = qualityGateFinder;
     this.qualityGateDao = dbClient.qualityGateDao();
     this.qualityGateConditionDao = dbClient.gateConditionDao();
