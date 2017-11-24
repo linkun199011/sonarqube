@@ -57,6 +57,7 @@ import org.sonar.server.user.UserSession;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.String.format;
+import static org.apache.commons.lang.StringUtils.isNotEmpty;
 import static org.sonar.server.ws.KeyExamples.KEY_PROJECT_EXAMPLE_001;
 import static org.sonar.server.ws.WsUtils.checkRequest;
 import static org.sonar.server.setting.ws.SettingsWsParameters.PARAM_BRANCH;
@@ -281,13 +282,17 @@ public class SetAction implements SettingsWsAction {
   }
 
   private static SetRequest toWsRequest(Request request) {
-    return new SetRequest()
+    SetRequest set = new SetRequest()
       .setKey(request.mandatoryParam(PARAM_KEY))
       .setValue(request.param(PARAM_VALUE))
       .setValues(request.multiParam(PARAM_VALUES))
       .setFieldValues(request.multiParam(PARAM_FIELD_VALUES))
       .setComponent(request.param(PARAM_COMPONENT))
       .setBranch(request.param(PARAM_BRANCH));
+    checkArgument(isNotEmpty(set.getKey()), "Setting key is mandatory and must not be empty");
+    checkArgument(set.getValues() != null, "Setting values must not be null");
+    checkArgument(set.getFieldValues() != null, "Setting fields values must not be null");
+    return set;
   }
 
   private static Map<String, String> readOneFieldValues(String json, String key) {
