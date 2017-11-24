@@ -20,7 +20,6 @@
 package org.sonar.server.organization.ws;
 
 import java.util.List;
-import java.util.Set;
 import javax.annotation.CheckForNull;
 import org.sonar.api.server.ws.Change;
 import org.sonar.api.server.ws.Request;
@@ -36,10 +35,10 @@ import org.sonarqube.ws.Organizations;
 import org.sonarqube.ws.Organizations.Actions;
 import org.sonarqube.ws.Organizations.Organization;
 
-import static org.sonar.core.util.stream.MoreCollectors.toSet;
 import static org.sonar.db.Pagination.forPage;
 import static org.sonar.db.organization.OrganizationQuery.newOrganizationQueryBuilder;
 import static org.sonar.db.permission.OrganizationPermission.ADMINISTER;
+import static org.sonar.db.permission.OrganizationPermission.PROVISION_PROJECTS;
 import static org.sonar.server.ws.WsUtils.checkRequest;
 import static org.sonar.server.ws.WsUtils.writeProtobuf;
 import static org.sonarqube.ws.Common.Paging;
@@ -94,36 +93,40 @@ public class SearchAction implements OrganizationsWsAction {
       int total = dbClient.organizationDao().countByQuery(dbSession, dbQuery);
       Paging paging = buildWsPaging(request, total);
       List<OrganizationDto> organizations = dbClient.organizationDao().selectByQuery(dbSession, dbQuery, forPage(paging.getPageIndex()).andSize(paging.getPageSize()));
-      writeResponse(request, response, organizations, searchOrganizationWithAdminPermission(dbSession), paging);
+      writeResponse(request, response, organizations, paging);
     }
   }
 
   private OrganizationQuery buildDbQuery(Request request) {
     return newOrganizationQueryBuilder()
-          .setKeys(getOrganizationKeys(request))
-          .setMember(getUserIdIfFilterOnMembership(request))
-          .build();
+      .setKeys(getOrganizationKeys(request))
+      .setMember(getUserIdIfFilterOnMembership(request))
+      .build();
   }
 
-  private Set<String> searchOrganizationWithAdminPermission(DbSession dbSession) {
-    return dbClient.organizationDao().selectByPermission(dbSession, userSession.getUserId(), ADMINISTER.getKey()).stream()
-          .map(OrganizationDto::getUuid)
-          .collect(toSet());
-  }
-
-  private void writeResponse(Request httpRequest, Response httpResponse, List<OrganizationDto> organizations, Set<String> adminOrganizationUuids, Paging paging) {
+  private void writeResponse(Request httpRequest, Response httpResponse, List<OrganizationDto> organizations, Paging paging) {
     Organizations.SearchWsResponse.Builder response = Organizations.SearchWsResponse.newBuilder();
     response.setPaging(paging);
     Organization.Builder wsOrganization = Organization.newBuilder();
     Actions.Builder wsActions = Actions.newBuilder();
     organizations
       .forEach(o -> {
-        boolean isAdmin = adminOrganizationUuids.contains(o.getUuid());
         wsOrganization.clear();
-        wsOrganization.setActions(wsActions.clear().setAdmin(isAdmin));
+        wsActions.clear();
+        wsOrganization.setActions(toActions(wsActions, o));
         response.addOrganizations(wsSupport.toOrganization(wsOrganization, o));
       });
     writeProtobuf(response.build(), httpRequest, httpResponse);
+  }
+
+  private Actions.Builder toActions(Actions.Builder actions, OrganizationDto organization) {
+    boolean canAdmin = userSession.hasPermission(ADMINISTER, organization);
+    boolean canProvisionProject = userSession.hasPermission(PROVISION_PROJECTS, organization);
+    actions.setAdmin(canAdmin);
+    actions.setDelete(canAdmin);
+    actions.setProvisionProject(canProvisionProject);
+
+    return actions;
   }
 
   private static Paging buildWsPaging(Request request, int total) {

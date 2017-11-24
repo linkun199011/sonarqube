@@ -10,7 +10,9 @@
       "name": "Foo Company",
       "guarded": true,
       "actions": {
-        "admin": false
+        "admin": false,
+        "delete": false,
+        "provisionProject": true
       }
     },
     {
@@ -21,7 +23,9 @@
       "avatar": "https://www.bar.com/logo.png",
       "guarded": false,
       "actions": {
-        "admin": true
+        "admin": true,
+        "delete": true,
+        "provisionProject": false
       }
     }
   ]

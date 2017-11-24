@@ -25,6 +25,7 @@ import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+import java.util.function.Function;
 import javax.annotation.Nullable;
 import org.junit.Rule;
 import org.junit.Test;
@@ -50,6 +51,7 @@ import static org.assertj.core.api.Assertions.tuple;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.sonar.db.permission.OrganizationPermission.ADMINISTER;
+import static org.sonar.db.permission.OrganizationPermission.PROVISION_PROJECTS;
 import static org.sonar.server.organization.ws.SearchAction.PARAM_MEMBER;
 import static org.sonar.test.JsonAssert.assertJson;
 
@@ -132,8 +134,9 @@ public class SearchActionTest {
     UserDto user = db.users().insertUser();
     db.organizations().addMember(barOrganization, user);
     db.organizations().addMember(fooOrganization, user);
-    db.users().insertPermissionOnUser(barOrganization, user, ADMINISTER);
-    userSession.logIn(user).addPermission(ADMINISTER, barOrganization);
+    userSession.logIn(user)
+      .addPermission(ADMINISTER, barOrganization)
+      .addPermission(PROVISION_PROJECTS, fooOrganization);
 
     TestRequest request = ws.newRequest()
       .setMediaType(MediaTypes.JSON);
@@ -149,13 +152,20 @@ public class SearchActionTest {
     OrganizationDto adminOrganization = db.organizations().insert();
     OrganizationDto browseOrganization = db.organizations().insert();
     UserDto user = db.users().insertUser();
-    userSession.logIn(user).addPermission(ADMINISTER, adminOrganization);
-    db.users().insertPermissionOnUser(adminOrganization, user, ADMINISTER);
+    userSession.logIn(user)
+      .addPermission(ADMINISTER, adminOrganization)
+      .addPermission(PROVISION_PROJECTS, browseOrganization);
 
     SearchWsResponse result = call(ws.newRequest());
 
-    assertThat(result.getOrganizationsList()).extracting(Organization::getKey, o -> o.getActions().getAdmin())
-      .containsExactlyInAnyOrder(tuple(adminOrganization.getKey(), true), tuple(browseOrganization.getKey(), false));
+    Function<Organization, Boolean> canAdmin = o -> o.getActions().getAdmin();
+    Function<Organization, Boolean> canDelete = o -> o.getActions().getDelete();
+    Function<Organization, Boolean> canProvisionProject = o -> o.getActions().getProvisionProject();
+    assertThat(result.getOrganizationsList())
+      .extracting(Organization::getKey, canAdmin, canDelete, canProvisionProject)
+      .containsExactlyInAnyOrder(
+        tuple(adminOrganization.getKey(), true, true, false),
+        tuple(browseOrganization.getKey(), false, false, true));
   }
 
   @Test

@@ -72,4 +72,6 @@ message User {
 
 message Actions {
   optional bool admin = 1;
+  optional bool delete = 2;
+  optional bool provisionProject = 3;
 }
