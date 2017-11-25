@@ -58,7 +58,6 @@ import org.sonar.server.rule.index.RuleIndexDefinition;
 import org.sonar.server.rule.index.RuleQuery;
 import org.sonarqube.ws.Common;
 import org.sonarqube.ws.Rules.SearchResponse;
-import org.sonarqube.ws.client.rules.SearchRequest;
 
 import static java.lang.String.format;
 import static org.sonar.api.server.ws.WebService.Param.ASCENDING;
@@ -539,4 +538,237 @@ public class SearchAction implements RulesWsAction {
     }
   }
 
+  private static class SearchRequest {
+
+    private String activation;
+    private List<String> activeSeverities;
+    private String asc;
+    private String availableSince;
+    private String compareToProfile;
+    private List<String> f;
+    private List<String> facets;
+    private List<String> inheritance;
+    private String isTemplate;
+    private List<String> languages;
+    private String organization;
+    private String p;
+    private String ps;
+    private String q;
+    private String qprofile;
+    private List<String> repositories;
+    private String ruleKey;
+    private String s;
+    private List<String> severities;
+    private List<String> statuses;
+    private List<String> tags;
+    private String templateKey;
+    private List<String> types;
+
+    public SearchRequest setActivation(String activation) {
+      this.activation = activation;
+      return this;
+    }
+
+    public String getActivation() {
+      return activation;
+    }
+
+    public SearchRequest setActiveSeverities(List<String> activeSeverities) {
+      this.activeSeverities = activeSeverities;
+      return this;
+    }
+
+    public List<String> getActiveSeverities() {
+      return activeSeverities;
+    }
+
+    public SearchRequest setAsc(String asc) {
+      this.asc = asc;
+      return this;
+    }
+
+    public String getAsc() {
+      return asc;
+    }
+
+    public SearchRequest setAvailableSince(String availableSince) {
+      this.availableSince = availableSince;
+      return this;
+    }
+
+    public String getAvailableSince() {
+      return availableSince;
+    }
+
+    public SearchRequest setCompareToProfile(String compareToProfile) {
+      this.compareToProfile = compareToProfile;
+      return this;
+    }
+
+    public String getCompareToProfile() {
+      return compareToProfile;
+    }
+
+    public SearchRequest setF(List<String> f) {
+      this.f = f;
+      return this;
+    }
+
+    public List<String> getF() {
+      return f;
+    }
+
+    public SearchRequest setFacets(List<String> facets) {
+      this.facets = facets;
+      return this;
+    }
+
+    public List<String> getFacets() {
+      return facets;
+    }
+
+    public SearchRequest setInheritance(List<String> inheritance) {
+      this.inheritance = inheritance;
+      return this;
+    }
+
+    public List<String> getInheritance() {
+      return inheritance;
+    }
+
+    public SearchRequest setIsTemplate(String isTemplate) {
+      this.isTemplate = isTemplate;
+      return this;
+    }
+
+    public String getIsTemplate() {
+      return isTemplate;
+    }
+
+    public SearchRequest setLanguages(List<String> languages) {
+      this.languages = languages;
+      return this;
+    }
+
+    public List<String> getLanguages() {
+      return languages;
+    }
+
+    public SearchRequest setOrganization(String organization) {
+      this.organization = organization;
+      return this;
+    }
+
+    public String getOrganization() {
+      return organization;
+    }
+
+    public SearchRequest setP(String p) {
+      this.p = p;
+      return this;
+    }
+
+    public String getP() {
+      return p;
+    }
+
+    public SearchRequest setPs(String ps) {
+      this.ps = ps;
+      return this;
+    }
+
+    public String getPs() {
+      return ps;
+    }
+
+    public SearchRequest setQ(String q) {
+      this.q = q;
+      return this;
+    }
+
+    public String getQ() {
+      return q;
+    }
+
+    public SearchRequest setQprofile(String qprofile) {
+      this.qprofile = qprofile;
+      return this;
+    }
+
+    public String getQprofile() {
+      return qprofile;
+    }
+
+    public SearchRequest setRepositories(List<String> repositories) {
+      this.repositories = repositories;
+      return this;
+    }
+
+    public List<String> getRepositories() {
+      return repositories;
+    }
+
+    public SearchRequest setRuleKey(String ruleKey) {
+      this.ruleKey = ruleKey;
+      return this;
+    }
+
+    public String getRuleKey() {
+      return ruleKey;
+    }
+
+    public SearchRequest setS(String s) {
+      this.s = s;
+      return this;
+    }
+
+    public String getS() {
+      return s;
+    }
+
+    public SearchRequest setSeverities(List<String> severities) {
+      this.severities = severities;
+      return this;
+    }
+
+    public List<String> getSeverities() {
+      return severities;
+    }
+
+    public SearchRequest setStatuses(List<String> statuses) {
+      this.statuses = statuses;
+      return this;
+    }
+
+    public List<String> getStatuses() {
+      return statuses;
+    }
+
+    public SearchRequest setTags(List<String> tags) {
+      this.tags = tags;
+      return this;
+    }
+
+    public List<String> getTags() {
+      return tags;
+    }
+
+    public SearchRequest setTemplateKey(String templateKey) {
+      this.templateKey = templateKey;
+      return this;
+    }
+
+    public String getTemplateKey() {
+      return templateKey;
+    }
+
+    public SearchRequest setTypes(List<String> types) {
+      this.types = types;
+      return this;
+    }
+
+    public List<String> getTypes() {
+      return types;
+    }
+  }
 }
