@@ -53,7 +53,6 @@ import org.sonar.server.exceptions.NotFoundException;
 import org.sonar.server.user.UserSession;
 import org.sonarqube.ws.Measures;
 import org.sonarqube.ws.Measures.ComponentTreeWsResponse;
-import org.sonarqube.ws.client.measure.ComponentTreeRequest;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
