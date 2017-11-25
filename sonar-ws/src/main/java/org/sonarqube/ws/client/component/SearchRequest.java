@@ -25,7 +25,7 @@ import javax.annotation.Nullable;
 
 import static java.util.Objects.requireNonNull;
 
-public class SearchWsRequest {
+public class SearchRequest {
   private String organization;
   private List<String> qualifiers;
   private Integer page;
@@ -38,7 +38,7 @@ public class SearchWsRequest {
     return organization;
   }
 
-  public SearchWsRequest setOrganization(@Nullable String organization) {
+  public SearchRequest setOrganization(@Nullable String organization) {
     this.organization = organization;
     return this;
   }
@@ -47,7 +47,7 @@ public class SearchWsRequest {
     return qualifiers;
   }
 
-  public SearchWsRequest setQualifiers(List<String> qualifiers) {
+  public SearchRequest setQualifiers(List<String> qualifiers) {
     this.qualifiers = requireNonNull(qualifiers);
     return this;
   }
@@ -57,7 +57,7 @@ public class SearchWsRequest {
     return page;
   }
 
-  public SearchWsRequest setPage(int page) {
+  public SearchRequest setPage(int page) {
     this.page = page;
     return this;
   }
@@ -67,7 +67,7 @@ public class SearchWsRequest {
     return pageSize;
   }
 
-  public SearchWsRequest setPageSize(int pageSize) {
+  public SearchRequest setPageSize(int pageSize) {
     this.pageSize = pageSize;
     return this;
   }
@@ -77,7 +77,7 @@ public class SearchWsRequest {
     return query;
   }
 
-  public SearchWsRequest setQuery(@Nullable String query) {
+  public SearchRequest setQuery(@Nullable String query) {
     this.query = query;
     return this;
   }
@@ -87,7 +87,7 @@ public class SearchWsRequest {
     return language;
   }
 
-  public SearchWsRequest setLanguage(@Nullable String language) {
+  public SearchRequest setLanguage(@Nullable String language) {
     this.language = language;
     return this;
   }

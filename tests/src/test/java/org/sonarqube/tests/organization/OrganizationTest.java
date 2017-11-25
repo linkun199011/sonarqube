@@ -37,6 +37,7 @@ import org.sonarqube.ws.UserGroups.Group;
 import org.sonarqube.ws.Users;
 import org.sonarqube.ws.Users.CreateWsResponse.User;
 import org.sonarqube.ws.client.component.ComponentsService;
+import org.sonarqube.ws.client.component.SearchRequest;
 import org.sonarqube.ws.client.organization.CreateWsRequest;
 import org.sonarqube.ws.client.organization.OrganizationService;
 import org.sonarqube.ws.client.organization.SearchWsRequest;
@@ -302,7 +303,7 @@ public class OrganizationTest {
 
   private Components.SearchWsResponse searchSampleProject(String organizationKey, ComponentsService componentsService) {
     return componentsService
-      .search(new org.sonarqube.ws.client.component.SearchWsRequest()
+      .search(new SearchRequest()
         .setOrganization(organizationKey)
         .setQualifiers(singletonList("TRK"))
         .setQuery("sample"));

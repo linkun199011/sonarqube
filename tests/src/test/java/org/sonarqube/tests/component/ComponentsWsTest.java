@@ -27,7 +27,7 @@ import org.junit.Test;
 import org.junit.rules.RuleChain;
 import org.sonarqube.qa.util.Tester;
 import org.sonarqube.ws.Components;
-import org.sonarqube.ws.client.component.SearchWsRequest;
+import org.sonarqube.ws.client.component.SearchRequest;
 import org.sonarqube.ws.client.component.ShowWsRequest;
 
 import static java.util.Collections.singletonList;
@@ -62,7 +62,7 @@ public class ComponentsWsTest {
 
   @Test
   public void search() {
-    Components.SearchWsResponse response = tester.wsClient().components().search(new SearchWsRequest()
+    Components.SearchWsResponse response = tester.wsClient().components().search(new SearchRequest()
       .setQualifiers(singletonList("FIL")));
 
     assertThat(response).isNotNull();

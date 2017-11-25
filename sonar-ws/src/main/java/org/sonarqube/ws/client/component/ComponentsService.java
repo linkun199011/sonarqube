@@ -52,7 +52,7 @@ public class ComponentsService extends BaseService {
     super(wsConnector, CONTROLLER_COMPONENTS);
   }
 
-  public SearchWsResponse search(SearchWsRequest request) {
+  public SearchWsResponse search(SearchRequest request) {
     GetRequest get = new GetRequest(path(ACTION_SEARCH))
       .setParam(PARAM_ORGANIZATION, request.getOrganization())
       .setParam(PARAM_QUALIFIERS, Joiner.on(",").join(request.getQualifiers()))

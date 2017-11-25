@@ -134,7 +134,7 @@ public class ComponentsServiceTest {
     int page = 17;
     int pageSize = 39;
     String textQuery = randomAlphanumeric(20);
-    underTest.search(new SearchWsRequest()
+    underTest.search(new SearchRequest()
       .setOrganization(organization)
       .setQualifiers(asList("q1", "q2"))
       .setPage(page)
