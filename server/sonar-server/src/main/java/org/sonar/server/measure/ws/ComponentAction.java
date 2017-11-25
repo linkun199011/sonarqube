@@ -53,7 +53,6 @@ import org.sonar.server.measure.ws.MetricDtoWithBestValue.MetricDtoToMetricDtoWi
 import org.sonar.server.user.UserSession;
 import org.sonarqube.ws.Measures;
 import org.sonarqube.ws.Measures.ComponentWsResponse;
-import org.sonarqube.ws.client.measure.ComponentRequest;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.String.format;
@@ -281,5 +280,111 @@ public class ComponentAction implements MeasuresWsAction {
 
   private void checkPermissions(ComponentDto baseComponent) {
     userSession.checkComponentPermission(UserRole.USER, baseComponent);
+  }
+
+  private static class ComponentRequest {
+    private String componentId;
+    private String componentKey;
+    private String component;
+    private String branch;
+    private List<String> metricKeys;
+    private List<String> additionalFields;
+    private String developerId;
+    private String developerKey;
+
+    /**
+     * @deprecated since 6.6, please use {@link #getComponent()} instead
+     */
+    @Deprecated
+    @CheckForNull
+    public String getComponentId() {
+      return componentId;
+    }
+
+    /**
+     * @deprecated since 6.6, please use {@link #setComponent(String)} instead
+     */
+    @Deprecated
+    public ComponentRequest setComponentId(@Nullable String componentId) {
+      this.componentId = componentId;
+      return this;
+    }
+
+    /**
+     * @deprecated since 6.6, please use {@link #getComponent()} instead
+     */
+    @Deprecated
+    @CheckForNull
+    public String getComponentKey() {
+      return componentKey;
+    }
+
+    /**
+     * @deprecated since 6.6, please use {@link #setComponent(String)} instead
+     */
+    @Deprecated
+    public ComponentRequest setComponentKey(@Nullable String componentKey) {
+      this.componentKey = componentKey;
+      return this;
+    }
+
+    @CheckForNull
+    public String getComponent() {
+      return component;
+    }
+
+    public ComponentRequest setComponent(@Nullable String component) {
+      this.component = component;
+      return this;
+    }
+
+    @CheckForNull
+    public String getBranch() {
+      return branch;
+    }
+
+    public ComponentRequest setBranch(@Nullable String branch) {
+      this.branch = branch;
+      return this;
+    }
+
+    public List<String> getMetricKeys() {
+      return metricKeys;
+    }
+
+    public ComponentRequest setMetricKeys(@Nullable List<String> metricKeys) {
+      this.metricKeys = metricKeys;
+      return this;
+    }
+
+    @CheckForNull
+    public List<String> getAdditionalFields() {
+      return additionalFields;
+    }
+
+    public ComponentRequest setAdditionalFields(@Nullable List<String> additionalFields) {
+      this.additionalFields = additionalFields;
+      return this;
+    }
+
+    @CheckForNull
+    public String getDeveloperId() {
+      return developerId;
+    }
+
+    public ComponentRequest setDeveloperId(@Nullable String developerId) {
+      this.developerId = developerId;
+      return this;
+    }
+
+    @CheckForNull
+    public String getDeveloperKey() {
+      return developerKey;
+    }
+
+    public ComponentRequest setDeveloperKey(@Nullable String developerKey) {
+      this.developerKey = developerKey;
+      return this;
+    }
   }
 }
