@@ -54,7 +54,6 @@ import org.sonar.server.exceptions.BadRequestException;
 import org.sonar.server.platform.SettingsChangeNotifier;
 import org.sonar.server.setting.ws.SettingValidations.SettingData;
 import org.sonar.server.user.UserSession;
-import org.sonarqube.ws.client.settings.SetRequest;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.String.format;
@@ -336,6 +335,70 @@ public class SetAction implements SettingsWsAction {
     private KeyValue(String key, String value) {
       this.key = key;
       this.value = value;
+    }
+  }
+
+  private static class SetRequest {
+
+    private String branch;
+    private String component;
+    private List<String> fieldValues;
+    private String key;
+    private String value;
+    private List<String> values;
+
+    public SetRequest setBranch(String branch) {
+      this.branch = branch;
+      return this;
+    }
+
+    public String getBranch() {
+      return branch;
+    }
+
+    public SetRequest setComponent(String component) {
+      this.component = component;
+      return this;
+    }
+
+    public String getComponent() {
+      return component;
+    }
+
+    public SetRequest setFieldValues(List<String> fieldValues) {
+      this.fieldValues = fieldValues;
+      return this;
+    }
+
+    public List<String> getFieldValues() {
+      return fieldValues;
+    }
+
+    public SetRequest setKey(String key) {
+      this.key = key;
+      return this;
+    }
+
+    public String getKey() {
+      return key;
+    }
+
+    public SetRequest setValue(String value) {
+      this.value = value;
+      return this;
+    }
+
+    public String getValue() {
+      return value;
+    }
+
+    public SetRequest setValues(List<String> values) {
+      this.values = values;
+      return this;
+    }
+
+    public List<String> getValues() {
+      return values;
     }
   }
 }
