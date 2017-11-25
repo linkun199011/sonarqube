@@ -24,12 +24,12 @@ import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class SearchWsRequestTest {
+public class SearchRequestTest {
   private static final ImmutableList<String> LIST_OF_STRINGS = ImmutableList.of("A", "B");
   private static final String SOME_STRING = "some string";
   public static final int SOME_INT = 894352;
 
-  private SearchWsRequest underTest = new SearchWsRequest();
+  private SearchRequest underTest = new SearchRequest();
 
   @Test
   public void getActionPlans_returns_null_when_SearchWsRequest_has_just_been_instantiated() {

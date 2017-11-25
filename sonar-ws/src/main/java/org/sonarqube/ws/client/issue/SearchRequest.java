@@ -23,7 +23,7 @@ import java.util.List;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 
-public class SearchWsRequest {
+public class SearchRequest {
   private List<String> actionPlans;
   private List<String> additionalFields;
   private Boolean asc;
@@ -69,7 +69,7 @@ public class SearchWsRequest {
     return actionPlans;
   }
 
-  public SearchWsRequest setActionPlans(@Nullable List<String> actionPlans) {
+  public SearchRequest setActionPlans(@Nullable List<String> actionPlans) {
     this.actionPlans = actionPlans;
     return this;
   }
@@ -79,7 +79,7 @@ public class SearchWsRequest {
     return additionalFields;
   }
 
-  public SearchWsRequest setAdditionalFields(@Nullable List<String> additionalFields) {
+  public SearchRequest setAdditionalFields(@Nullable List<String> additionalFields) {
     this.additionalFields = additionalFields;
     return this;
   }
@@ -89,7 +89,7 @@ public class SearchWsRequest {
     return asc;
   }
 
-  public SearchWsRequest setAsc(boolean asc) {
+  public SearchRequest setAsc(boolean asc) {
     this.asc = asc;
     return this;
   }
@@ -99,7 +99,7 @@ public class SearchWsRequest {
     return assigned;
   }
 
-  public SearchWsRequest setAssigned(@Nullable Boolean assigned) {
+  public SearchRequest setAssigned(@Nullable Boolean assigned) {
     this.assigned = assigned;
     return this;
   }
@@ -109,7 +109,7 @@ public class SearchWsRequest {
     return assignees;
   }
 
-  public SearchWsRequest setAssignees(@Nullable List<String> assignees) {
+  public SearchRequest setAssignees(@Nullable List<String> assignees) {
     this.assignees = assignees;
     return this;
   }
@@ -119,7 +119,7 @@ public class SearchWsRequest {
     return authors;
   }
 
-  public SearchWsRequest setAuthors(@Nullable List<String> authors) {
+  public SearchRequest setAuthors(@Nullable List<String> authors) {
     this.authors = authors;
     return this;
   }
@@ -129,7 +129,7 @@ public class SearchWsRequest {
     return componentKeys;
   }
 
-  public SearchWsRequest setComponentKeys(@Nullable List<String> componentKeys) {
+  public SearchRequest setComponentKeys(@Nullable List<String> componentKeys) {
     this.componentKeys = componentKeys;
     return this;
   }
@@ -139,7 +139,7 @@ public class SearchWsRequest {
     return componentUuids;
   }
 
-  public SearchWsRequest setComponentUuids(@Nullable List<String> componentUuids) {
+  public SearchRequest setComponentUuids(@Nullable List<String> componentUuids) {
     this.componentUuids = componentUuids;
     return this;
   }
@@ -149,7 +149,7 @@ public class SearchWsRequest {
     return createdAfter;
   }
 
-  public SearchWsRequest setCreatedAfter(@Nullable String createdAfter) {
+  public SearchRequest setCreatedAfter(@Nullable String createdAfter) {
     this.createdAfter = createdAfter;
     return this;
   }
@@ -159,7 +159,7 @@ public class SearchWsRequest {
     return createdAt;
   }
 
-  public SearchWsRequest setCreatedAt(@Nullable String createdAt) {
+  public SearchRequest setCreatedAt(@Nullable String createdAt) {
     this.createdAt = createdAt;
     return this;
   }
@@ -169,7 +169,7 @@ public class SearchWsRequest {
     return createdBefore;
   }
 
-  public SearchWsRequest setCreatedBefore(@Nullable String createdBefore) {
+  public SearchRequest setCreatedBefore(@Nullable String createdBefore) {
     this.createdBefore = createdBefore;
     return this;
   }
@@ -179,7 +179,7 @@ public class SearchWsRequest {
     return createdInLast;
   }
 
-  public SearchWsRequest setCreatedInLast(@Nullable String createdInLast) {
+  public SearchRequest setCreatedInLast(@Nullable String createdInLast) {
     this.createdInLast = createdInLast;
     return this;
   }
@@ -189,7 +189,7 @@ public class SearchWsRequest {
     return directories;
   }
 
-  public SearchWsRequest setDirectories(@Nullable List<String> directories) {
+  public SearchRequest setDirectories(@Nullable List<String> directories) {
     this.directories = directories;
     return this;
   }
@@ -199,7 +199,7 @@ public class SearchWsRequest {
     return facetMode;
   }
 
-  public SearchWsRequest setFacetMode(@Nullable String facetMode) {
+  public SearchRequest setFacetMode(@Nullable String facetMode) {
     this.facetMode = facetMode;
     return this;
   }
@@ -209,7 +209,7 @@ public class SearchWsRequest {
     return facets;
   }
 
-  public SearchWsRequest setFacets(@Nullable List<String> facets) {
+  public SearchRequest setFacets(@Nullable List<String> facets) {
     this.facets = facets;
     return this;
   }
@@ -219,7 +219,7 @@ public class SearchWsRequest {
     return fileUuids;
   }
 
-  public SearchWsRequest setFileUuids(@Nullable List<String> fileUuids) {
+  public SearchRequest setFileUuids(@Nullable List<String> fileUuids) {
     this.fileUuids = fileUuids;
     return this;
   }
@@ -229,7 +229,7 @@ public class SearchWsRequest {
     return issues;
   }
 
-  public SearchWsRequest setIssues(@Nullable List<String> issues) {
+  public SearchRequest setIssues(@Nullable List<String> issues) {
     this.issues = issues;
     return this;
   }
@@ -239,7 +239,7 @@ public class SearchWsRequest {
     return languages;
   }
 
-  public SearchWsRequest setLanguages(@Nullable List<String> languages) {
+  public SearchRequest setLanguages(@Nullable List<String> languages) {
     this.languages = languages;
     return this;
   }
@@ -249,7 +249,7 @@ public class SearchWsRequest {
     return moduleUuids;
   }
 
-  public SearchWsRequest setModuleUuids(@Nullable List<String> moduleUuids) {
+  public SearchRequest setModuleUuids(@Nullable List<String> moduleUuids) {
     this.moduleUuids = moduleUuids;
     return this;
   }
@@ -259,7 +259,7 @@ public class SearchWsRequest {
     return onComponentOnly;
   }
 
-  public SearchWsRequest setOnComponentOnly(Boolean onComponentOnly) {
+  public SearchRequest setOnComponentOnly(Boolean onComponentOnly) {
     this.onComponentOnly = onComponentOnly;
     return this;
   }
@@ -269,7 +269,7 @@ public class SearchWsRequest {
     return organization;
   }
 
-  public SearchWsRequest setOrganization(@Nullable String s) {
+  public SearchRequest setOrganization(@Nullable String s) {
     this.organization = s;
     return this;
   }
@@ -279,7 +279,7 @@ public class SearchWsRequest {
     return page;
   }
 
-  public SearchWsRequest setPage(int page) {
+  public SearchRequest setPage(int page) {
     this.page = page;
     return this;
   }
@@ -289,7 +289,7 @@ public class SearchWsRequest {
     return pageSize;
   }
 
-  public SearchWsRequest setPageSize(int pageSize) {
+  public SearchRequest setPageSize(int pageSize) {
     this.pageSize = pageSize;
     return this;
   }
@@ -299,7 +299,7 @@ public class SearchWsRequest {
     return projectKeys;
   }
 
-  public SearchWsRequest setProjectKeys(@Nullable List<String> projectKeys) {
+  public SearchRequest setProjectKeys(@Nullable List<String> projectKeys) {
     this.projectKeys = projectKeys;
     return this;
   }
@@ -309,7 +309,7 @@ public class SearchWsRequest {
     return projectUuids;
   }
 
-  public SearchWsRequest setProjectUuids(@Nullable List<String> projectUuids) {
+  public SearchRequest setProjectUuids(@Nullable List<String> projectUuids) {
     this.projectUuids = projectUuids;
     return this;
   }
@@ -319,7 +319,7 @@ public class SearchWsRequest {
     return resolutions;
   }
 
-  public SearchWsRequest setResolutions(@Nullable List<String> resolutions) {
+  public SearchRequest setResolutions(@Nullable List<String> resolutions) {
     this.resolutions = resolutions;
     return this;
   }
@@ -329,7 +329,7 @@ public class SearchWsRequest {
     return resolved;
   }
 
-  public SearchWsRequest setResolved(@Nullable Boolean resolved) {
+  public SearchRequest setResolved(@Nullable Boolean resolved) {
     this.resolved = resolved;
     return this;
   }
@@ -339,7 +339,7 @@ public class SearchWsRequest {
     return rules;
   }
 
-  public SearchWsRequest setRules(@Nullable List<String> rules) {
+  public SearchRequest setRules(@Nullable List<String> rules) {
     this.rules = rules;
     return this;
   }
@@ -349,7 +349,7 @@ public class SearchWsRequest {
     return sinceLeakPeriod;
   }
 
-  public SearchWsRequest setSinceLeakPeriod(@Nullable Boolean sinceLeakPeriod) {
+  public SearchRequest setSinceLeakPeriod(@Nullable Boolean sinceLeakPeriod) {
     this.sinceLeakPeriod = sinceLeakPeriod;
     return this;
   }
@@ -359,7 +359,7 @@ public class SearchWsRequest {
     return sort;
   }
 
-  public SearchWsRequest setSort(@Nullable String sort) {
+  public SearchRequest setSort(@Nullable String sort) {
     this.sort = sort;
     return this;
   }
@@ -369,7 +369,7 @@ public class SearchWsRequest {
     return severities;
   }
 
-  public SearchWsRequest setSeverities(@Nullable List<String> severities) {
+  public SearchRequest setSeverities(@Nullable List<String> severities) {
     this.severities = severities;
     return this;
   }
@@ -379,7 +379,7 @@ public class SearchWsRequest {
     return statuses;
   }
 
-  public SearchWsRequest setStatuses(@Nullable List<String> statuses) {
+  public SearchRequest setStatuses(@Nullable List<String> statuses) {
     this.statuses = statuses;
     return this;
   }
@@ -389,7 +389,7 @@ public class SearchWsRequest {
     return tags;
   }
 
-  public SearchWsRequest setTags(@Nullable List<String> tags) {
+  public SearchRequest setTags(@Nullable List<String> tags) {
     this.tags = tags;
     return this;
   }
@@ -399,7 +399,7 @@ public class SearchWsRequest {
     return types;
   }
 
-  public SearchWsRequest setTypes(@Nullable List<String> types) {
+  public SearchRequest setTypes(@Nullable List<String> types) {
     this.types = types;
     return this;
   }
@@ -409,7 +409,7 @@ public class SearchWsRequest {
     return componentRootUuids;
   }
 
-  public SearchWsRequest setComponentRootUuids(List<String> componentRootUuids) {
+  public SearchRequest setComponentRootUuids(List<String> componentRootUuids) {
     this.componentRootUuids = componentRootUuids;
     return this;
   }
@@ -419,7 +419,7 @@ public class SearchWsRequest {
     return componentRoots;
   }
 
-  public SearchWsRequest setComponentRoots(@Nullable List<String> componentRoots) {
+  public SearchRequest setComponentRoots(@Nullable List<String> componentRoots) {
     this.componentRoots = componentRoots;
     return this;
   }
@@ -429,7 +429,7 @@ public class SearchWsRequest {
     return components;
   }
 
-  public SearchWsRequest setComponents(@Nullable List<String> components) {
+  public SearchRequest setComponents(@Nullable List<String> components) {
     this.components = components;
     return this;
   }
@@ -439,7 +439,7 @@ public class SearchWsRequest {
     return projects;
   }
 
-  public SearchWsRequest setProjects(@Nullable List<String> projects) {
+  public SearchRequest setProjects(@Nullable List<String> projects) {
     this.projects = projects;
     return this;
   }
@@ -449,7 +449,7 @@ public class SearchWsRequest {
     return branch;
   }
 
-  public SearchWsRequest setBranch(@Nullable String branch) {
+  public SearchRequest setBranch(@Nullable String branch) {
     this.branch = branch;
     return this;
   }
