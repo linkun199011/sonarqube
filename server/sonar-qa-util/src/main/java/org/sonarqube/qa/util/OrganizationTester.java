@@ -28,7 +28,7 @@ import org.sonarqube.ws.Organizations;
 import org.sonarqube.ws.Users;
 import org.sonarqube.ws.client.HttpException;
 import org.sonarqube.ws.client.PostRequest;
-import org.sonarqube.ws.client.organization.CreateWsRequest;
+import org.sonarqube.ws.client.organization.CreateRequest;
 import org.sonarqube.ws.client.organization.OrganizationService;
 import org.sonarqube.ws.client.organization.SearchMembersWsRequest;
 import org.sonarqube.ws.client.organization.SearchWsRequest;
@@ -58,9 +58,9 @@ public class OrganizationTester {
   }
 
   @SafeVarargs
-  public final Organizations.Organization generate(Consumer<CreateWsRequest.Builder>... populators) {
+  public final Organizations.Organization generate(Consumer<CreateRequest.Builder>... populators) {
     int id = ID_GENERATOR.getAndIncrement();
-    CreateWsRequest.Builder request = new CreateWsRequest.Builder()
+    CreateRequest.Builder request = new CreateRequest.Builder()
       .setKey("org" + id)
       .setName("Org " + id)
       .setDescription("Description " + id)

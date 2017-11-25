@@ -38,7 +38,7 @@ import org.sonarqube.ws.Users;
 import org.sonarqube.ws.Users.CreateWsResponse.User;
 import org.sonarqube.ws.client.component.ComponentsService;
 import org.sonarqube.ws.client.component.SearchRequest;
-import org.sonarqube.ws.client.organization.CreateWsRequest;
+import org.sonarqube.ws.client.organization.CreateRequest;
 import org.sonarqube.ws.client.organization.OrganizationService;
 import org.sonarqube.ws.client.organization.SearchWsRequest;
 import org.sonarqube.ws.client.organization.UpdateWsRequest;
@@ -137,7 +137,7 @@ public class OrganizationTest {
     assertThatQualityProfilesDoNotExist(org);
 
     // create again
-    service.create(new CreateWsRequest.Builder()
+    service.create(new CreateRequest.Builder()
       .setName(NAME)
       .setKey(org.getKey())
       .build())
@@ -150,7 +150,7 @@ public class OrganizationTest {
     // create organization without key
     String name = "Foo  Company to keyize";
     String expectedKey = "foo-company-to-keyize";
-    Organization createdOrganization = tester.organizations().service().create(new CreateWsRequest.Builder()
+    Organization createdOrganization = tester.organizations().service().create(new CreateRequest.Builder()
       .setName(name)
       .build())
       .getOrganization();

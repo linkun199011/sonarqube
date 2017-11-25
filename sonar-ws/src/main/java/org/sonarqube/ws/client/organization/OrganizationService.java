@@ -49,7 +49,7 @@ public class OrganizationService extends BaseService {
     return call(get, SearchWsResponse.parser());
   }
 
-  public CreateWsResponse create(CreateWsRequest request) {
+  public CreateWsResponse create(CreateRequest request) {
     PostRequest post = new PostRequest(path("create"))
       .setParam("name", request.getName())
       .setParam("key", request.getKey())

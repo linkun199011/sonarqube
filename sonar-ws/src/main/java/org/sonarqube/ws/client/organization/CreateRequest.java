@@ -22,14 +22,14 @@ package org.sonarqube.ws.client.organization;
 import javax.annotation.concurrent.Immutable;
 
 @Immutable
-public class CreateWsRequest {
+public class CreateRequest {
   private final String name;
   private final String key;
   private final String description;
   private final String url;
   private final String avatar;
 
-  private CreateWsRequest(Builder builder) {
+  private CreateRequest(Builder builder) {
     this.name = builder.name;
     this.key = builder.key;
     this.description = builder.description;
@@ -93,8 +93,8 @@ public class CreateWsRequest {
       return this;
     }
 
-    public CreateWsRequest build() {
-      return new CreateWsRequest(this);
+    public CreateRequest build() {
+      return new CreateRequest(this);
     }
   }
 }
