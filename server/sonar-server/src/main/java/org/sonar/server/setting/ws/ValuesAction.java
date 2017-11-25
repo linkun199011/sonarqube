@@ -42,7 +42,6 @@ import org.sonar.server.component.ComponentFinder;
 import org.sonar.server.user.UserSession;
 import org.sonarqube.ws.Settings;
 import org.sonarqube.ws.Settings.ValuesWsResponse;
-import org.sonarqube.ws.client.settings.ValuesRequest;
 
 import static java.lang.String.format;
 import static java.util.stream.Stream.concat;
@@ -290,4 +289,37 @@ public class ValuesAction implements SettingsWsAction {
     }
   }
 
+  private static class ValuesRequest {
+
+    private String branch;
+    private String component;
+    private List<String> keys;
+
+    public ValuesRequest setBranch(String branch) {
+      this.branch = branch;
+      return this;
+    }
+
+    public String getBranch() {
+      return branch;
+    }
+
+    public ValuesRequest setComponent(String component) {
+      this.component = component;
+      return this;
+    }
+
+    public String getComponent() {
+      return component;
+    }
+
+    public ValuesRequest setKeys(List<String> keys) {
+      this.keys = keys;
+      return this;
+    }
+
+    public List<String> getKeys() {
+      return keys;
+    }
+  }
 }
