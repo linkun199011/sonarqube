@@ -160,7 +160,7 @@ public class ComponentsServiceTest {
     int page = 17;
     int pageSize = 39;
     String query = randomAlphanumeric(20);
-    underTest.tree(new TreeWsRequest()
+    underTest.tree(new TreeRequest()
       .setBaseComponentId(componentId)
       .setBaseComponentKey(componentKey)
       .setComponent(componentKey)

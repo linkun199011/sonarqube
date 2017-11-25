@@ -41,9 +41,9 @@ import org.sonarqube.ws.client.GetRequest;
 import org.sonarqube.ws.client.WsResponse;
 import org.sonarqube.ws.client.component.SearchProjectsRequest;
 import org.sonarqube.ws.client.component.ShowRequest;
-import org.sonarqube.ws.client.project.BulkUpdateKeyWsRequest;
+import org.sonarqube.ws.client.project.BulkUpdateKeyRequest;
 import org.sonarqube.ws.client.project.CreateRequest;
-import org.sonarqube.ws.client.project.UpdateKeyWsRequest;
+import org.sonarqube.ws.client.project.UpdateKeyRequest;
 import util.ItUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -74,7 +74,7 @@ public class ProjectKeyUpdateTest {
     Components.Component project = tester.wsClient().components().show(new ShowRequest().setKey(PROJECT_KEY)).getComponent();
     assertThat(project.getKey()).isEqualTo(PROJECT_KEY);
 
-    tester.wsClient().projects().updateKey(UpdateKeyWsRequest.builder()
+    tester.wsClient().projects().updateKey(UpdateKeyRequest.builder()
       .setKey(PROJECT_KEY)
       .setNewKey(newProjectKey)
       .build());
@@ -89,7 +89,7 @@ public class ProjectKeyUpdateTest {
     Components.Component project = tester.wsClient().components().show(new ShowRequest().setKey(PROJECT_KEY)).getComponent();
     assertThat(project.getKey()).isEqualTo(PROJECT_KEY);
 
-    Projects.BulkUpdateKeyWsResponse result = tester.wsClient().projects().bulkUpdateKey(BulkUpdateKeyWsRequest.builder()
+    Projects.BulkUpdateKeyWsResponse result = tester.wsClient().projects().bulkUpdateKey(BulkUpdateKeyRequest.builder()
       .setKey(PROJECT_KEY)
       .setFrom(PROJECT_KEY)
       .setTo(newProjectKey)
@@ -229,11 +229,11 @@ public class ProjectKeyUpdateTest {
   }
 
   private void updateKey(Projects.CreateWsResponse.Project project, String newKey) {
-    tester.wsClient().projects().updateKey(UpdateKeyWsRequest.builder().setKey(project.getKey()).setNewKey(newKey).build());
+    tester.wsClient().projects().updateKey(UpdateKeyRequest.builder().setKey(project.getKey()).setNewKey(newKey).build());
   }
 
   private void updateKey(String initialKey, String newKey) {
-    tester.wsClient().projects().updateKey(UpdateKeyWsRequest.builder().setKey(initialKey).setNewKey(newKey).build());
+    tester.wsClient().projects().updateKey(UpdateKeyRequest.builder().setKey(initialKey).setNewKey(newKey).build());
   }
 
   private Projects.CreateWsResponse.Project createProject(Organizations.Organization organization, String key, String name) {

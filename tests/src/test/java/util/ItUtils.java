@@ -72,7 +72,7 @@ import org.sonarqube.ws.client.WsClient;
 import org.sonarqube.ws.client.WsClientFactories;
 import org.sonarqube.ws.client.component.ShowRequest;
 import org.sonarqube.ws.client.measure.ComponentRequest;
-import org.sonarqube.ws.client.qualityprofile.RestoreWsRequest;
+import org.sonarqube.ws.client.qualityprofile.RestoreRequest;
 import org.sonarqube.ws.client.settings.ResetRequest;
 import org.sonarqube.ws.client.settings.SetRequest;
 
@@ -405,7 +405,7 @@ public class ItUtils {
     newAdminWsClient(orchestrator)
       .qualityProfiles()
       .restoreProfile(
-        RestoreWsRequest.builder()
+        RestoreRequest.builder()
           .setBackup(new File(uri))
           .setOrganization(organization)
           .build());

@@ -30,8 +30,8 @@ import org.sonarqube.ws.client.HttpException;
 import org.sonarqube.ws.client.PostRequest;
 import org.sonarqube.ws.client.organization.CreateRequest;
 import org.sonarqube.ws.client.organization.OrganizationService;
-import org.sonarqube.ws.client.organization.SearchMembersWsRequest;
-import org.sonarqube.ws.client.organization.SearchWsRequest;
+import org.sonarqube.ws.client.organization.SearchMembersRequest;
+import org.sonarqube.ws.client.organization.SearchRequest;
 import org.sonarqube.ws.client.user.GroupsRequest;
 
 import static java.util.Arrays.stream;
@@ -51,7 +51,7 @@ public class OrganizationTester {
   }
 
   void deleteNonGuardedOrganizations() {
-    service().search(SearchWsRequest.builder().build()).getOrganizationsList()
+    service().search(SearchRequest.builder().build()).getOrganizationsList()
       .stream()
       .filter(o -> !o.getKey().equals("default-organization"))
       .forEach(organization -> service().delete(organization.getKey()));
@@ -75,14 +75,14 @@ public class OrganizationTester {
   }
 
   public Organizations.Organization getDefaultOrganization() {
-    return service().search(SearchWsRequest.builder().build()).getOrganizationsList()
+    return service().search(SearchRequest.builder().build()).getOrganizationsList()
       .stream()
       .filter(o -> o.getKey().equals("default-organization"))
       .findFirst().orElseThrow(() -> new IllegalStateException("Can't find default organization"));
   }
 
   public OrganizationTester assertThatOrganizationDoesNotExist(String organizationKey) {
-    SearchWsRequest request = new SearchWsRequest.Builder().setOrganizations(organizationKey).build();
+    SearchRequest request = new SearchRequest.Builder().setOrganizations(organizationKey).build();
     Organizations.SearchWsResponse searchWsResponse = service().search(request);
     Assertions.assertThat(searchWsResponse.getOrganizationsList()).isEmpty();
     return this;
@@ -116,7 +116,7 @@ public class OrganizationTester {
   }
 
   private void verifyOrganizationMembership(@Nullable Organizations.Organization organization, String userLogin, boolean isMember) {
-    List<Organizations.User> users = service().searchMembers(new SearchMembersWsRequest()
+    List<Organizations.User> users = service().searchMembers(new SearchMembersRequest()
       .setQuery(userLogin)
       .setSelected("selected")
       .setOrganization(organization != null ? organization.getKey() : null))

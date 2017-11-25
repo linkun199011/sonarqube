@@ -62,7 +62,7 @@ public class ComponentsService extends BaseService {
     return call(get, SearchWsResponse.parser());
   }
 
-  public TreeWsResponse tree(TreeWsRequest request) {
+  public TreeWsResponse tree(TreeRequest request) {
     GetRequest get = new GetRequest(path(ACTION_TREE))
       .setParam(PARAM_COMPONENT_ID, request.getBaseComponentId())
       .setParam("baseComponentKey", request.getBaseComponentKey())
