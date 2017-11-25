@@ -77,7 +77,7 @@ public class ComponentsService extends BaseService {
     return call(get, TreeWsResponse.parser());
   }
 
-  public ShowWsResponse show(ShowWsRequest request) {
+  public ShowWsResponse show(ShowRequest request) {
     GetRequest get = new GetRequest(path(ACTION_SHOW))
       .setParam(PARAM_COMPONENT_ID, request.getId())
       .setParam(PARAM_COMPONENT, request.getKey())

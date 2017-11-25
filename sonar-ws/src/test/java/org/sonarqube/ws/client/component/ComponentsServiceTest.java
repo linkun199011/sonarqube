@@ -93,7 +93,7 @@ public class ComponentsServiceTest {
   public void show() {
     String key = randomAlphanumeric(20);
     String id = randomAlphanumeric(20);
-    underTest.show(new ShowWsRequest()
+    underTest.show(new ShowRequest()
       .setKey(key)
       .setId(id)
       .setBranch("my_branch"));

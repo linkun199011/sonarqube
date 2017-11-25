@@ -22,7 +22,7 @@ package org.sonarqube.ws.client.component;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 
-public class ShowWsRequest {
+public class ShowRequest {
   private String id;
   private String key;
   private String branch;
@@ -32,7 +32,7 @@ public class ShowWsRequest {
     return id;
   }
 
-  public ShowWsRequest setId(@Nullable String id) {
+  public ShowRequest setId(@Nullable String id) {
     this.id = id;
     return this;
   }
@@ -42,7 +42,7 @@ public class ShowWsRequest {
     return key;
   }
 
-  public ShowWsRequest setKey(@Nullable String key) {
+  public ShowRequest setKey(@Nullable String key) {
     this.key = key;
     return this;
   }
@@ -52,7 +52,7 @@ public class ShowWsRequest {
     return branch;
   }
 
-  public ShowWsRequest setBranch(@Nullable String branch) {
+  public ShowRequest setBranch(@Nullable String branch) {
     this.branch = branch;
     return this;
   }

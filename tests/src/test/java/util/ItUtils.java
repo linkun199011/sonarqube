@@ -70,7 +70,7 @@ import org.sonarqube.ws.client.GetRequest;
 import org.sonarqube.ws.client.HttpConnector;
 import org.sonarqube.ws.client.WsClient;
 import org.sonarqube.ws.client.WsClientFactories;
-import org.sonarqube.ws.client.component.ShowWsRequest;
+import org.sonarqube.ws.client.component.ShowRequest;
 import org.sonarqube.ws.client.measure.ComponentWsRequest;
 import org.sonarqube.ws.client.qualityprofile.RestoreWsRequest;
 import org.sonarqube.ws.client.settings.ResetRequest;
@@ -373,7 +373,7 @@ public class ItUtils {
   @CheckForNull
   public static Component getComponent(Orchestrator orchestrator, String componentKey) {
     try {
-      return newWsClient(orchestrator).components().show(new ShowWsRequest().setKey((componentKey))).getComponent();
+      return newWsClient(orchestrator).components().show(new ShowRequest().setKey((componentKey))).getComponent();
     } catch (org.sonarqube.ws.client.HttpException e) {
       if (e.code() == 404) {
         return null;
