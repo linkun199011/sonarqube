@@ -537,7 +537,7 @@ public class ComponentTreeAction implements MeasuresWsAction {
 
     return components
             .stream()
-            .filter(new HasMeasure(measuresByComponentUuidAndMetric, metricToSort.get(), wsRequest))
+            .filter(new HasMeasure(measuresByComponentUuidAndMetric, metricToSort.get(), wsRequest.getMetricPeriodSort()))
             .collect(MoreCollectors.toList(components.size()));
   }
 
