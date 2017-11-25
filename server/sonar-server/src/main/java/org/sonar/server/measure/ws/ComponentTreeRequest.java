@@ -23,7 +23,7 @@ import java.util.List;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 
-public class ComponentTreeRequest {
+class ComponentTreeRequest {
 
   private String baseComponentId;
   private String baseComponentKey;
