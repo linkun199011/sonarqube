@@ -46,7 +46,9 @@ import org.sonar.server.user.UserSession;
 import org.sonarqube.ws.Projects.SearchMyProjectsWsResponse;
 import org.sonarqube.ws.Projects.SearchMyProjectsWsResponse.Link;
 import org.sonarqube.ws.Projects.SearchMyProjectsWsResponse.Project;
-import org.sonarqube.ws.client.project.SearchMyProjectsRequest;
+
+import javax.annotation.CheckForNull;
+import javax.annotation.Nullable;
 
 import static com.google.common.base.Strings.emptyToNull;
 import static com.google.common.base.Strings.isNullOrEmpty;
@@ -213,6 +215,53 @@ public class SearchMyProjectsAction implements ProjectsWsAction {
     private ProjectsResult(List<ComponentDto> projects, int total) {
       this.projects = projects;
       this.total = total;
+    }
+  }
+
+  private static class SearchMyProjectsRequest {
+    private final Integer page;
+    private final Integer pageSize;
+
+    private SearchMyProjectsRequest(Builder builder) {
+      this.page = builder.page;
+      this.pageSize = builder.pageSize;
+    }
+
+    @CheckForNull
+    public Integer getPage() {
+      return page;
+    }
+
+    @CheckForNull
+    public Integer getPageSize() {
+      return pageSize;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+  }
+
+  private static class Builder {
+    private Integer page;
+    private Integer pageSize;
+
+    private Builder() {
+      // enforce method constructor
+    }
+
+    public Builder setPage(@Nullable Integer page) {
+      this.page = page;
+      return this;
+    }
+
+    public Builder setPageSize(@Nullable Integer pageSize) {
+      this.pageSize = pageSize;
+      return this;
+    }
+
+    public SearchMyProjectsRequest build() {
+      return new SearchMyProjectsRequest(this);
     }
   }
 }
