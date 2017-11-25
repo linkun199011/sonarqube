@@ -109,9 +109,9 @@ public class ComponentsServiceTest {
 
   @Test
   public void suggestions() {
-    SuggestionsWsRequest.More more = SuggestionsWsRequest.More.BRC;
+    SuggestionsRequest.More more = SuggestionsRequest.More.BRC;
     String s = randomAlphanumeric(20);
-    underTest.suggestions(SuggestionsWsRequest.builder()
+    underTest.suggestions(SuggestionsRequest.builder()
       .setMore(more)
       .setS(s)
       .setRecentlyBrowsed(asList("key-1", "key-2"))

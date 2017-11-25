@@ -22,7 +22,7 @@ package org.sonarqube.ws.client.component;
 import java.util.Collections;
 import java.util.List;
 
-public class SuggestionsWsRequest {
+public class SuggestionsRequest {
 
   public static final int MAX_PAGE_SIZE = 500;
   public static final int DEFAULT_PAGE_SIZE = 100;
@@ -41,7 +41,7 @@ public class SuggestionsWsRequest {
   private final List<String> recentlyBrowsed;
   private final String s;
 
-  private SuggestionsWsRequest(Builder builder) {
+  private SuggestionsRequest(Builder builder) {
     this.more = builder.more;
     this.recentlyBrowsed = builder.recentlyBrowsed;
     this.s = builder.s;
@@ -88,8 +88,8 @@ public class SuggestionsWsRequest {
       return this;
     }
 
-    public SuggestionsWsRequest build() {
-      return new SuggestionsWsRequest(this);
+    public SuggestionsRequest build() {
+      return new SuggestionsRequest(this);
     }
   }
 }

@@ -100,7 +100,7 @@ public class ComponentsService extends BaseService {
     return call(get, SearchProjectsWsResponse.parser());
   }
 
-  public WsResponse suggestions(SuggestionsWsRequest request) {
+  public WsResponse suggestions(SuggestionsRequest request) {
     GetRequest get = new GetRequest(path(ACTION_SUGGESTIONS))
       .setParam("more", request.getMore() == null ? null : request.getMore().toString())
       .setParam("recentlyBrowsed", request.getRecentlyBrowsed().stream().collect(Collectors.joining(",")))
