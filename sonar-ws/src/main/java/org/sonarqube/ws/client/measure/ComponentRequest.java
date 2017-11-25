@@ -23,7 +23,7 @@ import java.util.List;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 
-public class ComponentWsRequest {
+public class ComponentRequest {
   private String componentId;
   private String componentKey;
   private String component;
@@ -46,7 +46,7 @@ public class ComponentWsRequest {
    * @deprecated since 6.6, please use {@link #setComponent(String)} instead
    */
   @Deprecated
-  public ComponentWsRequest setComponentId(@Nullable String componentId) {
+  public ComponentRequest setComponentId(@Nullable String componentId) {
     this.componentId = componentId;
     return this;
   }
@@ -64,7 +64,7 @@ public class ComponentWsRequest {
    * @deprecated since 6.6, please use {@link #setComponent(String)} instead
    */
   @Deprecated
-  public ComponentWsRequest setComponentKey(@Nullable String componentKey) {
+  public ComponentRequest setComponentKey(@Nullable String componentKey) {
     this.componentKey = componentKey;
     return this;
   }
@@ -74,7 +74,7 @@ public class ComponentWsRequest {
     return component;
   }
 
-  public ComponentWsRequest setComponent(@Nullable String component) {
+  public ComponentRequest setComponent(@Nullable String component) {
     this.component = component;
     return this;
   }
@@ -84,7 +84,7 @@ public class ComponentWsRequest {
     return branch;
   }
 
-  public ComponentWsRequest setBranch(@Nullable String branch) {
+  public ComponentRequest setBranch(@Nullable String branch) {
     this.branch = branch;
     return this;
   }
@@ -93,7 +93,7 @@ public class ComponentWsRequest {
     return metricKeys;
   }
 
-  public ComponentWsRequest setMetricKeys(@Nullable List<String> metricKeys) {
+  public ComponentRequest setMetricKeys(@Nullable List<String> metricKeys) {
     this.metricKeys = metricKeys;
     return this;
   }
@@ -103,7 +103,7 @@ public class ComponentWsRequest {
     return additionalFields;
   }
 
-  public ComponentWsRequest setAdditionalFields(@Nullable List<String> additionalFields) {
+  public ComponentRequest setAdditionalFields(@Nullable List<String> additionalFields) {
     this.additionalFields = additionalFields;
     return this;
   }
@@ -113,7 +113,7 @@ public class ComponentWsRequest {
     return developerId;
   }
 
-  public ComponentWsRequest setDeveloperId(@Nullable String developerId) {
+  public ComponentRequest setDeveloperId(@Nullable String developerId) {
     this.developerId = developerId;
     return this;
   }
@@ -123,7 +123,7 @@ public class ComponentWsRequest {
     return developerKey;
   }
 
-  public ComponentWsRequest setDeveloperKey(@Nullable String developerKey) {
+  public ComponentRequest setDeveloperKey(@Nullable String developerKey) {
     this.developerKey = developerKey;
     return this;
   }

@@ -31,7 +31,7 @@ import org.sonarqube.ws.Measures;
 import org.sonarqube.ws.Measures.ComponentTreeWsResponse;
 import org.sonarqube.ws.Measures.ComponentWsResponse;
 import org.sonarqube.ws.client.measure.ComponentTreeRequest;
-import org.sonarqube.ws.client.measure.ComponentWsRequest;
+import org.sonarqube.ws.client.measure.ComponentRequest;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static java.util.Arrays.asList;
@@ -137,7 +137,7 @@ public class MeasuresWsTest {
   public void component() {
     scanXooSample();
 
-    ComponentWsResponse response = tester.wsClient().measures().component(new ComponentWsRequest()
+    ComponentWsResponse response = tester.wsClient().measures().component(new ComponentRequest()
       .setComponent("sample")
       .setMetricKeys(singletonList("ncloc"))
       .setAdditionalFields(newArrayList("metrics", "periods")));

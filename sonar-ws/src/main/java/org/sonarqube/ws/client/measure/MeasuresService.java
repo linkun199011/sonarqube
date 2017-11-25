@@ -79,7 +79,7 @@ public class MeasuresService extends BaseService {
     return call(getRequest, ComponentTreeWsResponse.parser());
   }
 
-  public ComponentWsResponse component(ComponentWsRequest request) {
+  public ComponentWsResponse component(ComponentRequest request) {
     GetRequest getRequest = new GetRequest(path(ACTION_COMPONENT))
       .setParam(DEPRECATED_PARAM_COMPONENT_ID, request.getComponentId())
       .setParam(DEPRECATED_PARAM_COMPONENT_KEY, request.getComponentKey())

@@ -32,7 +32,7 @@ import org.sonarqube.ws.client.component.TreeWsRequest;
 import org.sonarqube.ws.client.issue.IssuesService;
 import org.sonarqube.ws.client.issue.SearchRequest;
 import org.sonarqube.ws.client.measure.ComponentTreeRequest;
-import org.sonarqube.ws.client.measure.ComponentWsRequest;
+import org.sonarqube.ws.client.measure.ComponentRequest;
 import org.sonarqube.ws.client.measure.MeasuresService;
 
 import static java.util.Arrays.asList;
@@ -89,7 +89,7 @@ public class LiteTest {
   public void call_measures_ws() {
     // project measures
     MeasuresService measuresService = tester.wsClient().measures();
-    Measures.ComponentWsResponse component = measuresService.component(new ComponentWsRequest()
+    Measures.ComponentWsResponse component = measuresService.component(new ComponentRequest()
       .setComponentKey(PROJECT_KEY)
       .setMetricKeys(asList("lines", "ncloc", "files")));
     assertThat(component.getComponent().getMeasuresCount()).isEqualTo(3);
