@@ -46,8 +46,10 @@ import org.sonar.server.tester.UserSessionRule;
 import org.sonar.server.ws.WsActionTester;
 import org.sonarqube.ws.Projects.SearchMyProjectsWsResponse;
 import org.sonarqube.ws.Projects.SearchMyProjectsWsResponse.Project;
+import org.sonarqube.ws.client.project.SearchMyProjectsRequest;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 import static org.sonar.api.measures.CoreMetrics.ALERT_STATUS_KEY;
 import static org.sonar.db.component.ComponentTesting.newPrivateProjectDto;
 import static org.sonar.db.component.ComponentTesting.newView;
@@ -79,7 +81,7 @@ public class SearchMyProjectsActionTest {
     alertStatusMetric = dbClient.metricDao().insert(dbSession, newMetricDto().setKey(ALERT_STATUS_KEY).setValueType(ValueType.LEVEL.name()));
     db.commit();
 
-    ws = new WsActionTester(new SearchMyProjectsAction(dbClient, new SearchMyProjectsDataLoader(userSession, dbClient), userSession));
+    ws = new WsActionTester(new SearchMyProjectsAction(dbClient, userSession));
   }
 
   @Test
