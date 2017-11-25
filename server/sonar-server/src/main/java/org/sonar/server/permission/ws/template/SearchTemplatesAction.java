@@ -47,7 +47,9 @@ import org.sonarqube.ws.Permissions.Permission;
 import org.sonarqube.ws.Permissions.PermissionTemplate;
 import org.sonarqube.ws.Permissions.SearchTemplatesWsResponse;
 import org.sonarqube.ws.Permissions.SearchTemplatesWsResponse.TemplateIdQualifier;
-import org.sonarqube.ws.client.permission.SearchTemplatesRequest;
+
+import javax.annotation.CheckForNull;
+import javax.annotation.Nullable;
 
 import static org.sonar.api.utils.DateUtils.formatDateTime;
 import static org.sonar.core.util.Protobuf.setNullable;
@@ -229,5 +231,29 @@ public class SearchTemplatesAction implements PermissionsWsAction {
                     templatePermission.getWithProjectCreator()));
 
     return templatePermissionsByTemplateIdAndPermission;
+  }
+
+  private static class SearchTemplatesRequest {
+    private String query;
+    private String organizationUuid;
+
+    @CheckForNull
+    public String getQuery() {
+      return query;
+    }
+
+    public SearchTemplatesRequest setQuery(@Nullable String query) {
+      this.query = query;
+      return this;
+    }
+
+    public String getOrganizationUuid() {
+      return organizationUuid;
+    }
+
+    public SearchTemplatesRequest setOrganizationUuid(String s) {
+      this.organizationUuid = s;
+      return this;
+    }
   }
 }
