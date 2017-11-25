@@ -50,6 +50,7 @@ import org.sonarqube.ws.Permissions.SearchProjectPermissionsWsResponse;
 import org.sonarqube.ws.Permissions.SearchProjectPermissionsWsResponse.Project;
 import org.sonarqube.ws.client.permission.SearchProjectPermissionsRequest;
 
+import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 
 import static java.util.Collections.singletonList;
@@ -262,5 +263,74 @@ public class SearchProjectPermissionsAction implements PermissionsWsAction {
     });
 
     return userCountByRootComponentIdAndPermission;
+  }
+
+  private static class SearchProjectPermissionsRequest {
+    private String projectId;
+    private String projectKey;
+    private String qualifier;
+    private Integer page;
+    private Integer pageSize;
+    private String query;
+
+    @CheckForNull
+    public String getProjectId() {
+      return projectId;
+    }
+
+    public SearchProjectPermissionsRequest setProjectId(@Nullable String projectId) {
+      this.projectId = projectId;
+      return this;
+    }
+
+    @CheckForNull
+    public String getProjectKey() {
+      return projectKey;
+    }
+
+    public SearchProjectPermissionsRequest setProjectKey(@Nullable String projectKey) {
+      this.projectKey = projectKey;
+      return this;
+    }
+
+    @CheckForNull
+    public Integer getPage() {
+      return page;
+    }
+
+    public SearchProjectPermissionsRequest setPage(int page) {
+      this.page = page;
+      return this;
+    }
+
+    @CheckForNull
+    public Integer getPageSize() {
+      return pageSize;
+    }
+
+    public SearchProjectPermissionsRequest setPageSize(int pageSize) {
+      this.pageSize = pageSize;
+      return this;
+    }
+
+    @CheckForNull
+    public String getQuery() {
+      return query;
+    }
+
+    public SearchProjectPermissionsRequest setQuery(@Nullable String query) {
+      this.query = query;
+      return this;
+    }
+
+    @CheckForNull
+    public String getQualifier() {
+      return qualifier;
+    }
+
+    public SearchProjectPermissionsRequest setQualifier(@Nullable String qualifier) {
+      this.qualifier = qualifier;
+      return this;
+    }
   }
 }
