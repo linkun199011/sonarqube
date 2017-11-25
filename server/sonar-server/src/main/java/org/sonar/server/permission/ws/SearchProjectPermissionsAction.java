@@ -48,7 +48,6 @@ import org.sonarqube.ws.Common;
 import org.sonarqube.ws.Permissions.Permission;
 import org.sonarqube.ws.Permissions.SearchProjectPermissionsWsResponse;
 import org.sonarqube.ws.Permissions.SearchProjectPermissionsWsResponse.Project;
-import org.sonarqube.ws.client.permission.SearchProjectPermissionsRequest;
 
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
