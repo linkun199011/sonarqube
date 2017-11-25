@@ -32,10 +32,11 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import javax.annotation.CheckForNull;
+import javax.annotation.Nullable;
+
 import org.sonar.api.i18n.I18n;
 import org.sonar.api.resources.ResourceTypes;
 import org.sonar.api.server.ws.Change;
-import org.sonar.api.server.ws.Request;
 import org.sonar.api.server.ws.Response;
 import org.sonar.api.server.ws.WebService;
 import org.sonar.api.server.ws.WebService.Param;
@@ -52,7 +53,6 @@ import org.sonar.server.component.ComponentFinder;
 import org.sonar.server.user.UserSession;
 import org.sonarqube.ws.Components;
 import org.sonarqube.ws.Components.TreeWsResponse;
-import org.sonarqube.ws.client.component.TreeRequest;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.String.CASE_INSENSITIVE_ORDER;
@@ -165,12 +165,12 @@ public class TreeAction implements ComponentsWsAction {
   }
 
   @Override
-  public void handle(Request request, Response response) throws Exception {
+  public void handle(org.sonar.api.server.ws.Request request, Response response) throws Exception {
     TreeWsResponse treeWsResponse = doHandle(toTreeWsRequest(request));
     writeProtobuf(treeWsResponse, request, response);
   }
 
-  private TreeWsResponse doHandle(TreeRequest treeRequest) {
+  private TreeWsResponse doHandle(Request treeRequest) {
     try (DbSession dbSession = dbClient.openSession(false)) {
       ComponentDto baseComponent = loadComponent(dbSession, treeRequest);
       checkPermissions(baseComponent);
@@ -189,7 +189,7 @@ public class TreeAction implements ComponentsWsAction {
     }
   }
 
-  private ComponentDto loadComponent(DbSession dbSession, TreeRequest request) {
+  private ComponentDto loadComponent(DbSession dbSession, Request request) {
     String componentId = request.getBaseComponentId();
     String componentKey = request.getBaseComponentKey();
     String branch = request.getBranch();
@@ -246,7 +246,7 @@ public class TreeAction implements ComponentsWsAction {
     return wsComponent;
   }
 
-  private ComponentTreeQuery toComponentTreeQuery(TreeRequest request, ComponentDto baseComponent) {
+  private ComponentTreeQuery toComponentTreeQuery(Request request, ComponentDto baseComponent) {
     List<String> childrenQualifiers = childrenQualifiers(request, baseComponent.qualifier());
 
     ComponentTreeQuery.Builder query = ComponentTreeQuery.builder()
@@ -263,7 +263,7 @@ public class TreeAction implements ComponentsWsAction {
   }
 
   @CheckForNull
-  private List<String> childrenQualifiers(TreeRequest request, String baseQualifier) {
+  private List<String> childrenQualifiers(Request request, String baseQualifier) {
     List<String> requestQualifiers = request.getQualifiers();
     List<String> childrenQualifiers = null;
     if (LEAVES_STRATEGY.equals(request.getStrategy())) {
@@ -283,8 +283,8 @@ public class TreeAction implements ComponentsWsAction {
     return new ArrayList<>(qualifiersIntersection);
   }
 
-  private static TreeRequest toTreeWsRequest(Request request) {
-    return new TreeRequest()
+  private static Request toTreeWsRequest(org.sonar.api.server.ws.Request request) {
+    return new Request()
       .setBaseComponentId(request.param(PARAM_COMPONENT_ID))
       .setBaseComponentKey(request.param(PARAM_COMPONENT))
       .setBranch(request.param(PARAM_BRANCH))
@@ -297,12 +297,12 @@ public class TreeAction implements ComponentsWsAction {
       .setPageSize(request.mandatoryParamAsInt(Param.PAGE_SIZE));
   }
 
-  private static List<ComponentDto> paginateComponents(List<ComponentDto> components, TreeRequest wsRequest) {
+  private static List<ComponentDto> paginateComponents(List<ComponentDto> components, Request wsRequest) {
     return components.stream().skip(offset(wsRequest.getPage(), wsRequest.getPageSize()))
       .limit(wsRequest.getPageSize()).collect(toList());
   }
 
-  public static List<ComponentDto> sortComponents(List<ComponentDto> components, TreeRequest wsRequest) {
+  public static List<ComponentDto> sortComponents(List<ComponentDto> components, Request wsRequest) {
     List<String> sortParameters = wsRequest.getSort();
     if (sortParameters == null || sortParameters.isEmpty()) {
       return components;
@@ -332,6 +332,145 @@ public class TreeAction implements ComponentsWsAction {
       ordering = ordering.reverse();
     }
     return ordering.nullsLast().onResultOf(function);
+  }
+
+  private static class Request {
+    private String baseComponentId;
+    private String baseComponentKey;
+    private String component;
+    private String branch;
+    private String strategy;
+    private List<String> qualifiers;
+    private String query;
+    private List<String> sort;
+    private Boolean asc;
+    private Integer page;
+    private Integer pageSize;
+
+    /**
+     * @deprecated since 6.4, please use {@link #getComponent()} instead
+     */
+    @Deprecated
+    @CheckForNull
+    public String getBaseComponentId() {
+      return baseComponentId;
+    }
+
+    /**
+     * @deprecated since 6.4, please use {@link #setComponent(String)} instead
+     */
+    @Deprecated
+    public Request setBaseComponentId(@Nullable String baseComponentId) {
+      this.baseComponentId = baseComponentId;
+      return this;
+    }
+
+    /**
+     * @deprecated since 6.4, please use {@link #getComponent()} instead
+     */
+    @Deprecated
+    @CheckForNull
+    public String getBaseComponentKey() {
+      return baseComponentKey;
+    }
+
+    /**
+     * @deprecated since 6.4, please use {@link #setComponent(String)} instead
+     */
+    @Deprecated
+    public Request setBaseComponentKey(@Nullable String baseComponentKey) {
+      this.baseComponentKey = baseComponentKey;
+      return this;
+    }
+
+    public Request setComponent(@Nullable String component) {
+      this.component = component;
+      return this;
+    }
+
+    @CheckForNull
+    public String getComponent() {
+      return component;
+    }
+
+    @CheckForNull
+    public String getBranch() {
+      return branch;
+    }
+
+    public Request setBranch(@Nullable String branch) {
+      this.branch = branch;
+      return this;
+    }
+
+    @CheckForNull
+    public String getStrategy() {
+      return strategy;
+    }
+
+    public Request setStrategy(@Nullable String strategy) {
+      this.strategy = strategy;
+      return this;
+    }
+
+    @CheckForNull
+    public List<String> getQualifiers() {
+      return qualifiers;
+    }
+
+    public Request setQualifiers(@Nullable List<String> qualifiers) {
+      this.qualifiers = qualifiers;
+      return this;
+    }
+
+    @CheckForNull
+    public String getQuery() {
+      return query;
+    }
+
+    public Request setQuery(@Nullable String query) {
+      this.query = query;
+      return this;
+    }
+
+    @CheckForNull
+    public List<String> getSort() {
+      return sort;
+    }
+
+    public Request setSort(@Nullable List<String> sort) {
+      this.sort = sort;
+      return this;
+    }
+
+    public Boolean getAsc() {
+      return asc;
+    }
+
+    public Request setAsc(@Nullable Boolean asc) {
+      this.asc = asc;
+      return this;
+    }
+
+    @CheckForNull
+    public Integer getPage() {
+      return page;
+    }
+
+    public Request setPage(@Nullable Integer page) {
+      this.page = page;
+      return this;
+    }
+
+    @CheckForNull
+    public Integer getPageSize() {
+      return pageSize;
+    }
+
+    public Request setPageSize(@Nullable Integer pageSize) {
+      this.pageSize = pageSize;
+      return this;
+    }
   }
 
 }
