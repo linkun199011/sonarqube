@@ -25,7 +25,6 @@ import org.sonar.api.server.ws.WebService;
 import org.sonar.db.DbClient;
 import org.sonar.db.DbSession;
 import org.sonar.server.user.UserSession;
-import org.sonarqube.ws.client.usertokens.RevokeRequest;
 
 import static org.sonar.server.usertoken.ws.UserTokensWsParameters.ACTION_REVOKE;
 import static org.sonar.server.usertoken.ws.UserTokensWsParameters.PARAM_LOGIN;
@@ -82,5 +81,29 @@ public class RevokeAction implements UserTokensWsAction {
       RevokeRequest.setLogin(userSession.getLogin());
     }
     return RevokeRequest;
+  }
+
+  private static class RevokeRequest {
+
+    private String login;
+    private String name;
+
+    public RevokeRequest setLogin(String login) {
+      this.login = login;
+      return this;
+    }
+
+    public String getLogin() {
+      return login;
+    }
+
+    public RevokeRequest setName(String name) {
+      this.name = name;
+      return this;
+    }
+
+    public String getName() {
+      return name;
+    }
   }
 }
