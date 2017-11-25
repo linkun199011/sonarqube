@@ -30,7 +30,7 @@ import org.sonarqube.qa.util.Tester;
 import org.sonarqube.ws.Measures;
 import org.sonarqube.ws.Measures.ComponentTreeWsResponse;
 import org.sonarqube.ws.Measures.ComponentWsResponse;
-import org.sonarqube.ws.client.measure.ComponentTreeWsRequest;
+import org.sonarqube.ws.client.measure.ComponentTreeRequest;
 import org.sonarqube.ws.client.measure.ComponentWsRequest;
 
 import static com.google.common.collect.Lists.newArrayList;
@@ -59,7 +59,7 @@ public class MeasuresWsTest {
   public void component_tree() {
     scanXooSample();
 
-    ComponentTreeWsResponse response = tester.wsClient().measures().componentTree(new ComponentTreeWsRequest()
+    ComponentTreeWsResponse response = tester.wsClient().measures().componentTree(new ComponentTreeRequest()
       .setComponent("sample")
       .setMetricKeys(singletonList("ncloc"))
       .setAdditionalFields(asList("metrics", "periods")));
@@ -123,7 +123,7 @@ public class MeasuresWsTest {
   }
 
   private void verifyComponentTreeWithChildren(String baseComponentKey, String... childKeys) {
-    ComponentTreeWsResponse response = tester.wsClient().measures().componentTree(new ComponentTreeWsRequest()
+    ComponentTreeWsResponse response = tester.wsClient().measures().componentTree(new ComponentTreeRequest()
       .setComponent(baseComponentKey)
       .setMetricKeys(singletonList("ncloc"))
       .setStrategy("children"));

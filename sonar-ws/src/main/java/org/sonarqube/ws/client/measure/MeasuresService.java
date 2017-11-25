@@ -56,7 +56,7 @@ public class MeasuresService extends BaseService {
     super(wsConnector, CONTROLLER_MEASURES);
   }
 
-  public ComponentTreeWsResponse componentTree(ComponentTreeWsRequest request) {
+  public ComponentTreeWsResponse componentTree(ComponentTreeRequest request) {
     GetRequest getRequest = new GetRequest(path(ACTION_COMPONENT_TREE))
       .setParam(DEPRECATED_PARAM_BASE_COMPONENT_ID, request.getBaseComponentId())
       .setParam(DEPRECATED_PARAM_BASE_COMPONENT_KEY, request.getBaseComponentKey())

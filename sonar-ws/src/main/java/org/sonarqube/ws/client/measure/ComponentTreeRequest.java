@@ -23,7 +23,7 @@ import java.util.List;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 
-public class ComponentTreeWsRequest {
+public class ComponentTreeRequest {
 
   private String baseComponentId;
   private String baseComponentKey;
@@ -57,7 +57,7 @@ public class ComponentTreeWsRequest {
    * @deprecated since 6.6, please use {@link #setComponent(String)} instead
    */
   @Deprecated
-  public ComponentTreeWsRequest setBaseComponentId(@Nullable String baseComponentId) {
+  public ComponentTreeRequest setBaseComponentId(@Nullable String baseComponentId) {
     this.baseComponentId = baseComponentId;
     return this;
   }
@@ -75,7 +75,7 @@ public class ComponentTreeWsRequest {
    * @deprecated since 6.6, please use {@link #setComponent(String)} instead
    */
   @Deprecated
-  public ComponentTreeWsRequest setBaseComponentKey(@Nullable String baseComponentKey) {
+  public ComponentTreeRequest setBaseComponentKey(@Nullable String baseComponentKey) {
     this.baseComponentKey = baseComponentKey;
     return this;
   }
@@ -85,7 +85,7 @@ public class ComponentTreeWsRequest {
     return component;
   }
 
-  public ComponentTreeWsRequest setComponent(@Nullable String component) {
+  public ComponentTreeRequest setComponent(@Nullable String component) {
     this.component = component;
     return this;
   }
@@ -95,7 +95,7 @@ public class ComponentTreeWsRequest {
     return branch;
   }
 
-  public ComponentTreeWsRequest setBranch(@Nullable String branch) {
+  public ComponentTreeRequest setBranch(@Nullable String branch) {
     this.branch = branch;
     return this;
   }
@@ -105,7 +105,7 @@ public class ComponentTreeWsRequest {
     return strategy;
   }
 
-  public ComponentTreeWsRequest setStrategy(String strategy) {
+  public ComponentTreeRequest setStrategy(String strategy) {
     this.strategy = strategy;
     return this;
   }
@@ -115,7 +115,7 @@ public class ComponentTreeWsRequest {
     return qualifiers;
   }
 
-  public ComponentTreeWsRequest setQualifiers(@Nullable List<String> qualifiers) {
+  public ComponentTreeRequest setQualifiers(@Nullable List<String> qualifiers) {
     this.qualifiers = qualifiers;
     return this;
   }
@@ -125,7 +125,7 @@ public class ComponentTreeWsRequest {
     return additionalFields;
   }
 
-  public ComponentTreeWsRequest setAdditionalFields(@Nullable List<String> additionalFields) {
+  public ComponentTreeRequest setAdditionalFields(@Nullable List<String> additionalFields) {
     this.additionalFields = additionalFields;
     return this;
   }
@@ -135,7 +135,7 @@ public class ComponentTreeWsRequest {
     return query;
   }
 
-  public ComponentTreeWsRequest setQuery(@Nullable String query) {
+  public ComponentTreeRequest setQuery(@Nullable String query) {
     this.query = query;
     return this;
   }
@@ -145,7 +145,7 @@ public class ComponentTreeWsRequest {
     return sort;
   }
 
-  public ComponentTreeWsRequest setSort(@Nullable List<String> sort) {
+  public ComponentTreeRequest setSort(@Nullable List<String> sort) {
     this.sort = sort;
     return this;
   }
@@ -155,7 +155,7 @@ public class ComponentTreeWsRequest {
     return metricSort;
   }
 
-  public ComponentTreeWsRequest setMetricSort(@Nullable String metricSort) {
+  public ComponentTreeRequest setMetricSort(@Nullable String metricSort) {
     this.metricSort = metricSort;
     return this;
   }
@@ -165,7 +165,7 @@ public class ComponentTreeWsRequest {
     return metricSortFilter;
   }
 
-  public ComponentTreeWsRequest setMetricSortFilter(@Nullable String metricSortFilter) {
+  public ComponentTreeRequest setMetricSortFilter(@Nullable String metricSortFilter) {
     this.metricSortFilter = metricSortFilter;
     return this;
   }
@@ -175,7 +175,7 @@ public class ComponentTreeWsRequest {
     return metricKeys;
   }
 
-  public ComponentTreeWsRequest setMetricKeys(List<String> metricKeys) {
+  public ComponentTreeRequest setMetricKeys(List<String> metricKeys) {
     this.metricKeys = metricKeys;
     return this;
   }
@@ -185,7 +185,7 @@ public class ComponentTreeWsRequest {
     return asc;
   }
 
-  public ComponentTreeWsRequest setAsc(@Nullable Boolean asc) {
+  public ComponentTreeRequest setAsc(@Nullable Boolean asc) {
     this.asc = asc;
     return this;
   }
@@ -195,7 +195,7 @@ public class ComponentTreeWsRequest {
     return page;
   }
 
-  public ComponentTreeWsRequest setPage(int page) {
+  public ComponentTreeRequest setPage(int page) {
     this.page = page;
     return this;
   }
@@ -205,7 +205,7 @@ public class ComponentTreeWsRequest {
     return pageSize;
   }
 
-  public ComponentTreeWsRequest setPageSize(int pageSize) {
+  public ComponentTreeRequest setPageSize(int pageSize) {
     this.pageSize = pageSize;
     return this;
   }
@@ -215,7 +215,7 @@ public class ComponentTreeWsRequest {
     return metricPeriodSort;
   }
 
-  public ComponentTreeWsRequest setMetricPeriodSort(@Nullable Integer metricPeriodSort) {
+  public ComponentTreeRequest setMetricPeriodSort(@Nullable Integer metricPeriodSort) {
     this.metricPeriodSort = metricPeriodSort;
     return this;
   }
@@ -225,7 +225,7 @@ public class ComponentTreeWsRequest {
     return developerId;
   }
 
-  public ComponentTreeWsRequest setDeveloperId(@Nullable String developerId) {
+  public ComponentTreeRequest setDeveloperId(@Nullable String developerId) {
     this.developerId = developerId;
     return this;
   }
@@ -235,7 +235,7 @@ public class ComponentTreeWsRequest {
     return developerKey;
   }
 
-  public ComponentTreeWsRequest setDeveloperKey(@Nullable String developerKey) {
+  public ComponentTreeRequest setDeveloperKey(@Nullable String developerKey) {
     this.developerKey = developerKey;
     return this;
   }

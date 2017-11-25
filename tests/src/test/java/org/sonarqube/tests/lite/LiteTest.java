@@ -31,7 +31,7 @@ import org.sonarqube.ws.Measures;
 import org.sonarqube.ws.client.component.TreeWsRequest;
 import org.sonarqube.ws.client.issue.IssuesService;
 import org.sonarqube.ws.client.issue.SearchRequest;
-import org.sonarqube.ws.client.measure.ComponentTreeWsRequest;
+import org.sonarqube.ws.client.measure.ComponentTreeRequest;
 import org.sonarqube.ws.client.measure.ComponentWsRequest;
 import org.sonarqube.ws.client.measure.MeasuresService;
 
@@ -95,7 +95,7 @@ public class LiteTest {
     assertThat(component.getComponent().getMeasuresCount()).isEqualTo(3);
 
     // file measures
-    Measures.ComponentTreeWsResponse tree = measuresService.componentTree(new ComponentTreeWsRequest()
+    Measures.ComponentTreeWsResponse tree = measuresService.componentTree(new ComponentTreeRequest()
       .setBaseComponentKey(PROJECT_KEY)
       .setQualifiers(singletonList("FIL"))
       .setMetricKeys(asList("lines", "ncloc")));
