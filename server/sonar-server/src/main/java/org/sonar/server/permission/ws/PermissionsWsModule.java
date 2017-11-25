@@ -67,7 +67,6 @@ public class PermissionsWsModule extends Module {
       TemplateGroupsAction.class,
       BulkApplyTemplateAction.class,
       // utility classes
-      SearchProjectPermissionsDataLoader.class,
       SearchTemplatesDataLoader.class,
       PermissionWsSupport.class);
   }
